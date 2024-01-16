@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './carousel';
 import { DiVim } from 'react-icons/di';
+import Carousel2 from '../test/page';
 
 export default function Home() {
     let slides = [
@@ -11,7 +12,9 @@ export default function Home() {
 
     return (
         <>
-            <Carousel images={slides} />
+            {/* <Carousel2 /> */}
+            <Carousel />
+
         </>
     );
 }
