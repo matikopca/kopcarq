@@ -1,0 +1,20 @@
+.mainpage {
+        display: 'flex'; 
+        flex-direction: 'column'; 
+        justify-content: 'center'; 
+        align-items: 'center'; 
+        height: 100vh; 
+        width: auto; 
+        background-color: 'white';
+    }
+
+/* 
+.logo-img {
+    background-image: url("kopcarqlogo.png");
+    width: 100vh;
+    height: 50vh;
+    background-size: cover;  
+    background-repeat: no-repeat;
+    display: flex;
+} */
+
