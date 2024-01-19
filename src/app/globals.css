@@ -26,7 +26,7 @@ body {
     background-color: white;
 }
 
-@keyframes slideInAnimation {
+/* @keyframes slideInAnimation {
   from {
     transform: translateX(100%);
     opacity: 0.7;
@@ -35,9 +35,9 @@ body {
     transform: translateX(0);
     opacity: 1;
   }
-}
+} */
 
-@keyframes slideOutAnimation {
+/* @keyframes slideOutAnimation {
   from {
     transform: translateX(0);
     opacity: 1;
@@ -46,4 +46,16 @@ body {
     transform: translateX(-100%);
     opacity: 0.3;
   }
+} */
+
+/* @keyframes fadeUpAnimation {
+  from {
+    transform: translateY(100%);
+    opacity: 0.2;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
+ */

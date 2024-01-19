@@ -22,13 +22,15 @@ const Carousel = () => {
     }, []);
 
     return (
-        <div className="relative w-screen h-4/6 overflow-hidden">
+        <div className="relative w-screen h-full overflow-hidden">
             {images.map((image, index) => (
                 <div
                     key={index}
-                    className={`w-full h-full absolute transition-transform ${index === currentSlide ? 'transform translate-x-0 opacity-100' : 'transform translate-x-full opacity-0 pointer-events-none'
+                    className={`w-full h-full absolute transition-transform ${index === currentSlide ?
+                        'animate-slideInAnimation duration-4000 ease-in-out' :
+                        'opacity-0 pointer-events-none animate-slideOutAnimation duration-5000 ease-in-out'
                         }`}
-                    style={{ animation: index === currentSlide ? 'slideInAnimation 4s ease-in-out' : 'slideOutAnimation 5s ease-in-out' }}
+                // style={{ animation: index === currentSlide ? 'slideInAnimation 4s ease-in-out' : 'slideOutAnimation 5s ease-in-out' }}
                 >
                     <Image
                         src={image}
