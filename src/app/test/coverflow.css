@@ -3,27 +3,27 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #111111;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-/* TEST COVERFLOWWW */
-
 
 .container {
 
   max-width:100%!important;
   width:100%;
-  /* height:600px; */
+  height:600px;
   perspective:1000;
   -webkit-perspective:1000;
   perspective-origin:50% 50%;
@@ -34,13 +34,12 @@
 }
 
 .coverflow {
-  display: flex;
-  justify-content: center;
+
   position:absolute;
   top:50%;
-  /* left:50%; */
+  left:50%;
   backface-visibility: visible;
-  transform:scale(1) translateZ(-550px);
+  transform:scale(1) translateZ(-400px);
   transform-style:preserve-3d;
   transform-origin:50% 50%;
   cursor:pointer;
@@ -48,13 +47,13 @@
 
 .coverflow-item {
 
-  width:600px;
-  height:380px;
+  width:500px;
+  height:350px;
   transform-origin:50% 50%;
   position:absolute;
   backface-visibility: visible;
-  /* top:-175px; */
-  /* left:-250px; */
+  top:-175px;
+  left:-250px;
   border:2px solid #eee;
   border-radius:8px;
   background-color:#111;

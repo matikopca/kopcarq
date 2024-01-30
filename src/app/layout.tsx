@@ -17,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} flex flex-col h-screen w-screen`}>
+    <html lang="en" className='!scroll-smooth bg-black'>
+      <body className={`${inter.className} flex flex-col h-screen w-screen scroll-smooth bg-black`}>
         <Navbar />
         {children}
       </body>

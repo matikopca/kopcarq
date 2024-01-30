@@ -14,38 +14,61 @@ const config: Config = {
 				"gradient-conic":
 					"conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
 				logoimg: "url('/kopcarqlogo.png')",
+				nosotrosimg: "url('/nosotrospic.jpg')",
 			},
 			animation: {
-				slideOutAnimation: "slideOutAnimation 5s",
-				slideInAnimation: "slideInAnimation 4s",
+				fadeLeftAnimation: "fadeLeftAnimation 4s",
+				fadeRightAnimation: "fadeRightAnimation 3s",
+				fadeToRightAnimation: "fadeToRightAnimation 3s",
+				fadeBottomAnimation: "fadeBottomAnimation 3s",
 				fadeUpAnimation: "fadeUpAnimation 3s",
 			},
 
 			keyframes: {
-				slideOutAnimation: {
+				fadeLeftAnimation: {
 					from: {
 						transform: "translateX(0%)",
 						opacity: "1",
 					},
 					to: {
 						transform: "translateX(-100%)",
-						opacity: "0.3",
+						opacity: "0",
 					},
 				},
-				slideInAnimation: {
+				fadeRightAnimation: {
 					from: {
 						transform: "translateX(100%)",
-						opacity: "0.7",
+						opacity: "0",
 					},
 					to: {
 						transform: "translateX(0%)",
 						opacity: "1",
 					},
 				},
+				fadeToRightAnimation: {
+					from: {
+						transform: "translateX(-150%)",
+						opacity: "0",
+					},
+					to: {
+						transform: "translateX(0%)",
+						opacity: "1",
+					},
+				},
+				fadeBottomAnimation: {
+					from: {
+						transform: "translateY(-100%)",
+						opacity: "0",
+					},
+					to: {
+						transform: "translateY(0%)",
+						opacity: "1",
+					},
+				},
 				fadeUpAnimation: {
 					from: {
 						transform: "translateY(100%)",
-						opacity: "0.2",
+						opacity: "0",
 					},
 					to: {
 						transform: "translateY(0%)",

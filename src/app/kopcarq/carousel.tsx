@@ -16,7 +16,7 @@ const Carousel = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentSlide((prevSlide) => (prevSlide === images.length - 1 ? 0 : prevSlide + 1));
-        }, 10000); // Change the interval as needed (5000ms = 5 seconds)
+        }, 5000); // Change the interval as needed (5000ms = 5 seconds)
 
         return () => clearInterval(interval);
     }, []);
@@ -26,9 +26,7 @@ const Carousel = () => {
             {images.map((image, index) => (
                 <div
                     key={index}
-                    className={`w-full h-full absolute transition-transform ${index === currentSlide ?
-                        'animate-slideInAnimation duration-4000 ease-in-out' :
-                        'opacity-0 pointer-events-none animate-slideOutAnimation duration-5000 ease-in-out'
+                    className={`w-full h-full absolute ${index === currentSlide ? 'animate-fadeRightAnimation' : 'opacity-0 pointer-events-none animate-fadeLeftAnimation'
                         }`}
                 // style={{ animation: index === currentSlide ? 'slideInAnimation 4s ease-in-out' : 'slideOutAnimation 5s ease-in-out' }}
                 >
