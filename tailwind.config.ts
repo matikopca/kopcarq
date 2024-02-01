@@ -20,8 +20,11 @@ const config: Config = {
 				fadeLeftAnimation: "fadeLeftAnimation 4s",
 				fadeRightAnimation: "fadeRightAnimation 3s",
 				fadeToRightAnimation: "fadeToRightAnimation 3s",
+				fadeToLeftAnimation: "fadeToLeftAnimation 3s",
 				fadeBottomAnimation: "fadeBottomAnimation 3s",
 				fadeUpAnimation: "fadeUpAnimation 3s",
+				fadeDownLeftAnimation: "fadeDownLeftAnimation 1s",
+				fadeUpRightAnimation: "fadeUpRightAnimation 1s",
 			},
 
 			keyframes: {
@@ -55,6 +58,16 @@ const config: Config = {
 						opacity: "1",
 					},
 				},
+				fadeToLeftAnimation: {
+					from: {
+						transform: "translateX(150%)",
+						opacity: "0",
+					},
+					to: {
+						transform: "translateX(0%)",
+						opacity: "1",
+					},
+				},
 				fadeBottomAnimation: {
 					from: {
 						transform: "translateY(-100%)",
@@ -72,6 +85,26 @@ const config: Config = {
 					},
 					to: {
 						transform: "translateY(0%)",
+						opacity: "1",
+					},
+				},
+				fadeDownLeftAnimation: {
+					from: {
+						transform: "translateY(-80%) translateX(70%)",
+						opacity: "0.8",
+					},
+					to: {
+						transform: "translateY(0%) translateX(0%)",
+						opacity: "1",
+					},
+				},
+				fadeUpRightAnimation: {
+					from: {
+						transform: "translateY(0%) translateX(0%)",
+						opacity: "0.8",
+					},
+					to: {
+						transform: "translateY(-100%) translateX(90%)",
 						opacity: "1",
 					},
 				},
