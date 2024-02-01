@@ -23,7 +23,7 @@ const Coverflow = (props: { imagestst: string[] }) => {
     const el = useRef<HTMLDivElement>(null);
 
     // Help function to set element style transform property
-    function setTransform(el: HTMLDivElement, xpos: number, ypos: number, zpos: number, yAngle: number) {
+    function setTransform(el: HTMLDivElement | any, xpos: number, ypos: number, zpos: number, yAngle: number) {
         el.style.transform = `translateX(${xpos}px) translateY(${ypos}px) translateZ(${zpos}px) rotateY(${yAngle}deg)`;
     }
     useEffect(() => {
@@ -33,7 +33,6 @@ const Coverflow = (props: { imagestst: string[] }) => {
     // Target an item, bring it to center
     function target(index: number) {
         const items = el.current!.children;
-
         // Assuming 'index' is the current index of the clicked item
         const lastIndex = items.length - 1;
 
