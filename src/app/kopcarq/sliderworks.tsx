@@ -37,7 +37,7 @@ const Coverflow = (props: { imagestst: string[] }) => {
         const lastIndex = items.length - 1;
 
         for (let i = 0; i < items.length; i++) {
-            const item = items[i] as HTMLDivElement;
+            let item = items[i] as HTMLDivElement;
 
             // Center item position and angle
             if (i === index) {
@@ -45,10 +45,13 @@ const Coverflow = (props: { imagestst: string[] }) => {
 
                 if (index === 0) {
                     // If the first item is clicked, set the last item to the left
-                    setTransform(items[lastIndex], -ITEM_DISTANCE, 30, 0, -ITEM_ANGLE);
+                    //setTransform(items[lastIndex], -ITEM_DISTANCE, 30, 0, -ITEM_ANGLE);
+                    let item = items[lastIndex] as HTMLDivElement
+                    setTransform(item, -ITEM_DISTANCE, 30, 0, -ITEM_ANGLE);
                 } else if (index === lastIndex) {
                     // If the last item is clicked, set the first item to the right
-                    setTransform(items[0], ITEM_DISTANCE, 30, 0, ITEM_ANGLE);
+                    let item = items[0] as HTMLDivElement
+                    setTransform(item, ITEM_DISTANCE, 30, 0, ITEM_ANGLE);
                 }
             }
             // Left items position and angle
