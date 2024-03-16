@@ -33,15 +33,24 @@ export default function Home() {
         necesito: '',
         necesito2: '', // Puedes establecer valores predeterminados según sea necesario
         descripcion: '',
+        message: '',
     });
 
     useEffect(() => {
         // Cuando formData.nombre cambie, actualiza la descripción
         setFormData((prevFormData) => ({
             ...prevFormData,
-            descripcion: `Hola Kopcarq! Mi nombre es ${prevFormData.nombre}  `,
+            message: `${prevFormData.necesito ? `Hola Kopcarq! Necesito informacion sobre su servicio de` : ""} ${prevFormData.necesito} ${prevFormData.necesito === 'Obra' ? `para una ${prevFormData.necesito2}.` : ''} 
+Mas datos: 
+${prevFormData.descripcion}
+
+Muchas gracias,
+${prevFormData.nombre}
+${prevFormData.email}`,
         }));
-    }, [formData.nombre]);
+    }, [formData.necesito, formData.necesito2, formData.descripcion]);
+
+
 
     // Función para manejar cambios en el formulario
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -152,33 +161,49 @@ export default function Home() {
             <InView>
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full mb-0.5'>
-                        <section id="contactoRef" className='flex flex-col relative h-full overflow-hidden snap-end'>
-                            <div className='z-0 flex justify-center relative items-center h-full md:w-2/3 bg-white '>
-                                <form className='flex flex-col justify-around items-center text-red-950 text-2xl border-4 border-red-950 rounded-md w-11/12 h-auto'>
-                                    <div className='flex flex-row w-full h-auto align-middle'>
-                                        <div className='flex flex-col w-full h-full flex-1'>
-                                            <label className='h-10' htmlFor="nombre">Nombre:</label>
-                                            {/* <label className='h-10' htmlFor="apellido">Apellido:</label> */}
-                                            {/* <label className='h-10' htmlFor="telefono">Teléfono <span>*</span>:</label> */}
-                                            <label className='h-10' htmlFor="email">Email:</label>
-                                            <label className='h-10' htmlFor="necesito">Necesito:</label>
-                                            {formData.necesito === "Obra" && (
-                                                <label className='h-10' htmlFor="necesito2">Tipo:</label>
-                                            )
-                                            }
+                        <section id="contactoRef" className='flex flex-col relative h-full bg-gradient-to-br from-red-600 to bg-red-950 bg-opacity-1 overflow-hidden snap-end'>
+                            <div className={`z-10 flex-1 relative md:absolute top-0 right-0 w-full items-center justify-center md:w-1/3
+                             ${inView ? 'animate-fadeBottomAnimation 2s ease-in-out visible' : 'hidden'}`}>
+                                <div className="absolute top-6 md:relative md:top-0 text-light text-white" id="header">
+                                    <div className="p-4 row items-center justify-center">
+                                        <h1 className="letter-spacing-xs mb-8 font-extrabold text-4xl lg:text-6xl">
+                                            Contacto
+                                        </h1>
+                                        <h3 className='text-2xl font-medium flex'>
+                                            Dejanos tu mensaje, te respondemos a la brevedad.
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className='z-20 md:z-0 flex-[3-0-0] px-4 justify-center align-bottom relative items-end h-screen w-screen md:w-2/3 bg-transparent md:bg-white '>
+                                <form className='flex flex-col items-center text-white md:text-red-950 text-2xl  rounded-md w-full h-full'>
+                                    <div className='flex flex-1 flex-col w-full h-auto align-middle'>
+                                        {/* <div className='flex flex-col w-full h-full flex-1'> */}
+                                        <div className='flex flex-col md:flex-row'>
+                                            <label className='flex-1 h-10' htmlFor="nombre">Nombre:</label>
+                                            <input className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10' type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
                                         </div>
-                                        <div className='flex flex-col w-[75%] h-auto flex-2 overflow-hidden'>
-                                            <input className='border-red-950 border-2 rounded-md h-10' type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
-                                            {/* <input className='border-red-950 border-2 rounded-md h-10' type="text" id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} /> */}
-                                            {/* <input className='border-red-950 border-2 rounded-md h-10' type="tel" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} required /> */}
-                                            <input className='border-red-950 border-2 rounded-md h-10' type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
-                                            <select className='border-red-950 border-2 rounded-md h-10' id="necesito" name="necesito" onChange={handleChange}>
+                                        <div className='flex flex-col md:flex-row'>
+                                            <label className='flex-1 h-10' htmlFor="email">Email:</label>
+                                            <input className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10' type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                                        </div>
+                                        <div className='flex flex-col md:flex-row'>
+                                            <label className='flex-1 h-10' htmlFor="necesito">Necesito:</label>
+                                            <select className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10' id="necesito" name="necesito" onChange={handleChange}>
                                                 <option value="">Choose an option</option>
                                                 <option value="Planos">Planos</option>
                                                 <option value="Obra">Obra</option>
                                             </select>
+                                        </div>
+                                        <div className='flex flex-col md:flex-row'>
                                             {formData.necesito === "Obra" && (
-                                                <select id="necesito2" name="necesito2" onChange={handleChange} className='border-red-950 border-2 rounded-md h-10'>
+                                                <label className='flex-1 h-10' htmlFor="necesito2">Tipo:</label>
+                                            )
+                                            }
+                                            {formData.necesito === "Obra" && (
+                                                <select id="necesito2" name="necesito2" onChange={handleChange}
+                                                    className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10'>
                                                     <option value="">Choose an option</option>
                                                     <option value="Construcción">Construcción</option>
                                                     <option value="Remodelación">Remodelación</option>
@@ -188,45 +213,34 @@ export default function Home() {
                                             }
                                         </div>
                                     </div>
-                                    <div className='flex flex-col h-auto w-full '>
+                                    <div className='flex flex-[2-0-0] flex-col h-auto w-full '>
                                         <label className='relative left-0 h-10' htmlFor="descripcion">Contanos mas!:</label>
-                                        <div className='flex justify-center w-full h-auto'>
-                                            <textarea className='align-text-top border-red-950 border-2 h-auto resize-y overflow-y-auto w-full rounded-md'
+                                        <div className='flex justify-center w-full h-[70%]'>
+                                            <textarea className='align-text-top border-red-950 border-2 text-black h-auto resize-y overflow-y-auto w-full rounded-md'
                                                 id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleChange} />
+                                        </div>
+                                        <div className='hidden justify-center w-full h-auto'>
+                                            <textarea className='align-text-top border-red-950 border-2 h-auto resize-y overflow-y-auto w-full rounded-md'
+                                                id="descripcion" name="message" value={formData.message} onChange={handleChange} />
                                         </div>
                                     </div>
 
-                                    <div className='justify-end items-baseline'>
+                                    <div className='relative justify-end items-baseline'>
                                         {/* <input className='border-red-950 border-2 rounded-md' type="submit" value="Enviar" onClick={handleSubmit} /> */}
-                                        <button className='border-red-950 border-2 rounded-md' onClick={handleSubmit}>Enviar</button>
+                                        <a className='border-red-950 border-2 rounded-md'
+                                            href={`https://wa.me/+5493416289174/?text=${encodeURIComponent(formData.message)}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                        >Enviar</a>
                                     </div>
                                 </form>
                             </div>
-                            <div className={`z-10 bg-gradient-to-br from-red-600 to bg-red-950 bg-opacity-1 absolute top-0 right-0 w-full h-full flex items-center justify-center md:w-1/3
-                             ${inView ? 'animate-fadeBottomAnimation 2s ease-in-out visible' : 'hidden'}`}>
-                                <div className="text-light text-white" id="header">
-                                    <div className="p-8 row items-center">
-                                        <h1 className="letter-spacing-xs mb-8 font-extrabold text-4xl lg:text-6xl">
-                                            Contacto
-                                        </h1>
-                                        <h3 className='text-2xl font-medium flex'>
-                                            Dejanos tu mensaje, te respondemos a la brevedad.
-                                        </h3>
 
-                                        <ul className="list-disc pl-4">
-                                            <li>Remodelaciones integrales de hogares y comercios</li>
-                                            <li>Reparaciones estructurales y estéticas</li>
-                                            <li>Diseño arquitectónico personalizado</li>
-                                            <li>Asesoramiento en selección de materiales y colores</li>
-                                            {/* Add more specific services as needed */}
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                         </section>
                     </div>
-                )}
-            </InView>
+                )
+                }
+            </InView >
 
         </div >
     );

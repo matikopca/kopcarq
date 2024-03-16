@@ -16,14 +16,14 @@ export default function Navbar() {
         ${isOpen ? "h-screen" : "transition-all ease-out duration-700 h-[80px]"}`}>
 
             <a href='#headerRef' onClick={toggleNav} className="">
-                <Image src="/kopcarqlogo.png" alt="Kopcarq Logo" width={150} height={150} className="h-[80px] w-[150px] top-0 left-0 absolute rounded-br-[50px]" />
+                <Image src="/kopcarqlogo.png" alt="Kopcarq Logo" width={150} height={150} className="h-min w-min max-h-[40px] max-w-[75px] md:h-[80px] md:w-[150px] top-0 left-0 absolute rounded-br-md" />
             </a>
 
-            <div className="bg-red-950 flex m-0 h-[80px] w-[120px] top-0 right-0 absolute pl-3 justify-center items-center rounded-bl-[50px]">
+            <div className="bg-red-950 flex m-0 h-min w-min top-0 right-0 absolute pl-3 justify-center items-center rounded-bl-md">
                 <Hamburger toggled={isOpen} toggle={setOpen} direction="left" />
             </div>
 
-            <div className={`-z-10 bg-gradient-to-b from-red-950 to bg-red-500 flex m-0 h-[80px] w-[120px] overflow-hidden absolute justify-center items-center rounded-bl-[50px]
+            <div className={`-z-10 bg-gradient-to-b from-red-950 to bg-red-500 flex h-0 w-0 overflow-hidden absolute justify-center items-center rounded-bl-[50px]
             ${isOpen ? "transition-all ease-in duration-700 top-0 right-0 h-screen w-screen rounded-bl-none" :
                     "transition-all ease-out duration-700 -top-5 -right-5"}`} >
                 <ul className="w-full h-[30%] flex flex-col justify-between">
