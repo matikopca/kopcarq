@@ -5,9 +5,9 @@ import React, { useState, useEffect } from 'react';
 
 
 const images = [
-    '/int1.png',
-    '/int2.png',
-    '/kopcarqlogo.png',
+    '/edif1.jpg',
+    '/edif2.jpg',
+    '/edif3.jpg',
 ];
 
 const Carousel = () => {

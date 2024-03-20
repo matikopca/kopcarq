@@ -55,9 +55,9 @@
   backface-visibility: visible;
   /* top:-175px; */
   /* left:-250px; */
-  border:2px solid #af0404;
+  border:2px solid rgb(239 68 68);
   border-radius:16px;
-  background-color:rgb(151, 6, 6);
+  background-color:rgb(239 68 68);
   background-repeat:no-repeat;
   background-size:cover;
   background-position:center;
@@ -83,7 +83,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(127 29 29);
+  background: rgb(239 68 68);
   border-radius: 5px;
 
 }

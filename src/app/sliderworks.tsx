@@ -12,11 +12,13 @@ const CENTER_ITEM_POP = 400;
 const CENTER_ITEM_DISTANCE = 80;
 
 
-const Coverflow = (props: { imagestst: string[] }) => {
+export default function Coverflow() {
+    ;
+    // const Coverflow = (props: { imagestst: string[] }) => {
     const imagestst = [
-        '/int1.png',
-        '/int2.png',
-        '/kopcarqlogo.png',
+        '/edif1.jpg',
+        '/edif2.jpg',
+        '/edif3.jpg',
         '/int2.png',
     ];
 
@@ -83,4 +85,4 @@ const Coverflow = (props: { imagestst: string[] }) => {
     )
 }
 
-export default Coverflow;
+// export default Coverflow;

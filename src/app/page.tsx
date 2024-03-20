@@ -8,12 +8,12 @@ import Link from 'next/link';
 
 export default function Home() {
 
-    const imagestst = [
-        '/int1.png',
-        '/int2.png',
-        '/kopcarqlogo.png',
-        '/int2.png',
-    ];
+    // const imagestst = [
+    //     '/edif1.jpg',
+    //     '/edif2.jpg',
+    //     '/edif3.jpg',
+    //     '/int2.png',
+    // ];
 
 
     const [selection, setSelection] = useState('');
@@ -71,15 +71,15 @@ ${prevFormData.email}`,
 
             <InView>
                 {({ inView, ref }) => (
-                    <div ref={ref} className='h-full mb-0.5'>
+                    <div ref={ref} className='h-full'>
                         <section id="headerRef" className="h-full relative overflow-hidden snap-start">
                             <div className="h-full relative top-0 z-0">
                                 <Carousel />
                             </div>
 
-                            <div className={`z-10 bg-gradient-to-br from-red-950 to bg-red-700 bg-opacity-90 absolute top-0 left-0 w-full h-full flex items-center justify-center md:w-1/3
+                            <div className={`z-10 bg-black bg-opacity-70 absolute top-0 left-0 w-full h-full flex items-center justify-start
                              ${inView ? 'animate-fadeUpAnimation 3s ease-in-out visible' : 'hidden'}`}>
-                                <div className="text-light text-white text-2xl p-2 " id="header">
+                                <div className="text-light ml-2 text-white text-2xl p-2 " id="header">
 
                                     <div className="letter-spacing-xs font-extrabold text-5xl md:text-3xl lg:6xl">
                                         Transformamos espacios
@@ -88,7 +88,7 @@ ${prevFormData.email}`,
                                         con dedicación y creatividad.</div>
 
                                     <div className="mt-6 font-bold pt-8 md:flex-row lg:justify-left gap-x-3 gap-y-3">
-                                        <a className="btn btn-primary btn-lg text-white" href="#nosotrosRef">Conoce mas sobre nosotros! ➔</a>
+                                        <a className="btn btn-primary btn-lg text-red-500" href="#nosotrosRef">Conoce mas sobre nosotros! ➔</a>
                                     </div>
 
                                 </div>
@@ -101,11 +101,11 @@ ${prevFormData.email}`,
 
             <InView>
                 {({ inView, ref }) => (
-                    <div ref={ref} className='h-full mb-0.5'>
+                    <div ref={ref} className='h-full'>
                         <section id="trabajosRef" className='flex relative h-full bg-white overflow-hidden snap-end justify-center items-baseline'>
                             <div className={` bg-white bg-opacity-1 absolute top-0 right-0 w-full h-full flex items-center justify-center md:w-1/3
                                          ${inView ? 'animate-fadeToRightAnimation 3s ease-in-out visible' : 'hidden'}`}>
-                                <div className="text-light text-red-700 top-20 absolute p-8 row items-center" id="header">
+                                <div className="text-light text-red-500 top-20 absolute p-8 row items-center" id="header">
                                     {/* <div className="p-8 row items-center"> */}
                                     <h1 className="letter-spacing-xs mb-8 font-extrabold text-4xl lg:text-6xl">
                                         Trabajos
@@ -125,7 +125,8 @@ ${prevFormData.email}`,
                                 </div>
                             </div>
 
-                            <Coverflow imagestst={imagestst} />
+                            {/* <Coverflow imagestst={imagestst} /> */}
+                            <Coverflow />
 
                         </section >
                     </div>
@@ -135,7 +136,7 @@ ${prevFormData.email}`,
 
             <InView>
                 {({ inView, ref }) => (
-                    <div ref={ref} className='h-full mb-0.5'>
+                    <div ref={ref} className='h-full'>
                         <section id="nosotrosRef" className='flex h-full relative bg-nosotrosimg bg-cover overflow-hidden snap-end'>
                             <div className={`bg-black bg-opacity-90 p-8 absolute md:relative top-0 right-0 w-full h-full flex items-center justify-center md:w-1/3
                                         ${inView ? 'animate-fadeRightAnimation 3s ease-in-out visible' : 'hidden'}`}>
@@ -160,8 +161,8 @@ ${prevFormData.email}`,
 
             <InView>
                 {({ inView, ref }) => (
-                    <div ref={ref} className='h-full mb-0.5'>
-                        <section id="contactoRef" className='flex flex-col relative h-full bg-gradient-to-br from-red-600 to bg-red-950 bg-opacity-1 overflow-hidden snap-end'>
+                    <div ref={ref} className='h-full'>
+                        <section id="contactoRef" className='flex flex-col relative h-full bg-red-500 bg-opacity-1 overflow-hidden snap-end'>
                             <div className={`z-10 flex-1 relative md:absolute top-0 right-0 w-full items-center justify-center md:w-1/3
                              ${inView ? 'animate-fadeBottomAnimation 2s ease-in-out visible' : 'hidden'}`}>
                                 <div className="absolute top-6 md:relative md:top-0 text-light text-white" id="header">
@@ -177,20 +178,20 @@ ${prevFormData.email}`,
                             </div>
 
                             <div className='z-20 md:z-0 flex-[3-0-0] px-4 justify-center align-bottom relative items-end h-screen w-screen md:w-2/3 bg-transparent md:bg-white '>
-                                <form className='flex flex-col items-center text-white md:text-red-950 text-2xl  rounded-md w-full h-full'>
+                                <form className='flex flex-col items-center text-white md:text-red-500 text-2xl  rounded-md w-full h-full'>
                                     <div className='flex flex-1 flex-col w-full h-auto align-middle'>
                                         {/* <div className='flex flex-col w-full h-full flex-1'> */}
                                         <div className='flex flex-col md:flex-row'>
                                             <label className='flex-1 h-10' htmlFor="nombre">Nombre:</label>
-                                            <input className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10' type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
+                                            <input className='flex-[3-0-0] border-red-500 border-2 text-black rounded-md h-10' type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
                                         </div>
                                         <div className='flex flex-col md:flex-row'>
                                             <label className='flex-1 h-10' htmlFor="email">Email:</label>
-                                            <input className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10' type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                                            <input className='flex-[3-0-0] border-red-500 border-2 text-black rounded-md h-10' type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
                                         </div>
                                         <div className='flex flex-col md:flex-row'>
                                             <label className='flex-1 h-10' htmlFor="necesito">Necesito:</label>
-                                            <select className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10' id="necesito" name="necesito" onChange={handleChange}>
+                                            <select className='flex-[3-0-0] border-red-500 border-2 text-black rounded-md h-10' id="necesito" name="necesito" onChange={handleChange}>
                                                 <option value="">Choose an option</option>
                                                 <option value="Planos">Planos</option>
                                                 <option value="Obra">Obra</option>
@@ -203,7 +204,7 @@ ${prevFormData.email}`,
                                             }
                                             {formData.necesito === "Obra" && (
                                                 <select id="necesito2" name="necesito2" onChange={handleChange}
-                                                    className='flex-[3-0-0] border-red-950 border-2 text-black rounded-md h-10'>
+                                                    className='flex-[3-0-0] border-red-500 border-2 text-black rounded-md h-10'>
                                                     <option value="">Choose an option</option>
                                                     <option value="Construcción">Construcción</option>
                                                     <option value="Remodelación">Remodelación</option>
@@ -216,18 +217,18 @@ ${prevFormData.email}`,
                                     <div className='flex flex-[2-0-0] flex-col h-auto w-full '>
                                         <label className='relative left-0 h-10' htmlFor="descripcion">Contanos mas!:</label>
                                         <div className='flex justify-center w-full h-[70%]'>
-                                            <textarea className='align-text-top border-red-950 border-2 text-black h-auto resize-y overflow-y-auto w-full rounded-md'
+                                            <textarea className='align-text-top border-red-500 border-2 text-black h-auto resize-y overflow-y-auto w-full rounded-md'
                                                 id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleChange} />
                                         </div>
                                         <div className='hidden justify-center w-full h-auto'>
-                                            <textarea className='align-text-top border-red-950 border-2 h-auto resize-y overflow-y-auto w-full rounded-md'
+                                            <textarea className='align-text-top border-red-500 border-2 h-auto resize-y overflow-y-auto w-full rounded-md'
                                                 id="descripcion" name="message" value={formData.message} onChange={handleChange} />
                                         </div>
                                     </div>
 
                                     <div className='relative justify-end items-baseline'>
                                         {/* <input className='border-red-950 border-2 rounded-md' type="submit" value="Enviar" onClick={handleSubmit} /> */}
-                                        <a className='border-red-950 border-2 rounded-md'
+                                        <a className='border-red-500 border-2 rounded-md'
                                             href={`https://wa.me/+5493416289174/?text=${encodeURIComponent(formData.message)}`}
                                             target="_blank"
                                             rel="noopener noreferrer"
