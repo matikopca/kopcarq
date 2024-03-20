@@ -78,7 +78,7 @@ ${prevFormData.email}`,
                             </div>
 
                             <div className={`z-10 bg-black bg-opacity-70 absolute top-0 left-0 w-full h-full flex items-center justify-start
-                             ${inView ? 'animate-fadeUpAnimation 3s ease-in-out visible' : 'hidden'}`}>
+                             ${inView ? 'animate-fadeUpAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="text-light ml-2 text-white text-2xl p-2 " id="header">
 
                                     <div className="letter-spacing-xs font-extrabold text-5xl md:text-3xl lg:6xl">
@@ -104,7 +104,7 @@ ${prevFormData.email}`,
                     <div ref={ref} className='h-full'>
                         <section id="trabajosRef" className='flex relative h-full bg-white overflow-hidden snap-end justify-center items-baseline'>
                             <div className={` bg-white bg-opacity-1 absolute top-0 right-0 w-full h-full flex items-center justify-center md:w-1/3
-                                         ${inView ? 'animate-fadeToRightAnimation 3s ease-in-out visible' : 'hidden'}`}>
+                                         ${inView ? 'animate-fadeToRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="text-light text-red-500 top-20 absolute p-8 row items-center" id="header">
                                     {/* <div className="p-8 row items-center"> */}
                                     <h1 className="letter-spacing-xs mb-8 font-extrabold text-4xl lg:text-6xl">
@@ -139,7 +139,7 @@ ${prevFormData.email}`,
                     <div ref={ref} className='h-full'>
                         <section id="nosotrosRef" className='flex h-full relative bg-nosotrosimg bg-cover overflow-hidden snap-end'>
                             <div className={`bg-black bg-opacity-90 p-8 absolute md:relative top-0 right-0 w-full h-full flex items-center justify-center md:w-1/3
-                                        ${inView ? 'animate-fadeRightAnimation 3s ease-in-out visible' : 'hidden'}`}>
+                                        ${inView ? 'animate-fadeRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="text-light text-white top-20 absolute p-8 row items-center" id="header">
                                     <h1 className="letter-spacing-xs mb-8 font-extrabold text-4xl lg:text-6xl">
                                         Nosotros
@@ -164,7 +164,7 @@ ${prevFormData.email}`,
                     <div ref={ref} className='h-full'>
                         <section id="contactoRef" className='flex flex-col relative h-full bg-red-500 bg-opacity-1 overflow-hidden snap-end'>
                             <div className={`z-10 flex-1 relative md:absolute top-0 right-0 w-full items-center justify-center md:w-1/3
-                             ${inView ? 'animate-fadeBottomAnimation 2s ease-in-out visible' : 'hidden'}`}>
+                             ${inView ? 'animate-fadeBottomAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="absolute top-6 md:relative md:top-0 text-light text-white" id="header">
                                     <div className="p-4 row items-center justify-center">
                                         <h1 className="letter-spacing-xs mb-8 font-extrabold text-4xl lg:text-6xl">
