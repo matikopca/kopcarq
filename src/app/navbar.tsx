@@ -1,25 +1,24 @@
 'use client'
 import Image from "next/image"
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Turn as Hamburger } from 'hamburger-react'
+import { MdOpacity } from "react-icons/md";
 
 export default function Navbar() {
 
-
     const [isOpen, setOpen] = useState(false)
-
     const toggleNav = () => { setOpen(false) }
+
 
     return (
         // <div className="z-50 grid grid-cols-4 h-20 w-full bg-gradient-to-b border-b-2 outline-black outline-1.5 outline border-b-amber-500 from-red-950 bg-red-600 text-white sticky overflow-hidden">
         <div className={`z-50 visible flex justify-between items-center w-full absolute overflow-hidden text-white md:h-16  md:bg-black md:bg-opacity-60
-        ${isOpen ? "absolute top-0 h-screen bg-black transition-all ease-in duration-700" : "transition-all ease-out duration-500 w-0 h-16"}`}>
+        ${isOpen ? "absolute top-0 h-screen bg-black transition-all ease-in duration-700" : "transition-all ease-out duration-500 w-0 h-16"} `}>
 
             <a href='#headerRef' onClick={toggleNav}
-                className={`h-24 relative md:h-20 flex justify-center pl-3 md:p-0 md:flex-1 md:w-10/12 text-center
+                className={`h-full w-1/2 items-center relative flex justify-center md:p-0 md:flex-1 md:w-10/12 text-center
             ${isOpen ? "absolute top-0 p-0" : ""} `}>
-                <Image src="/kopcarqblanco.png" alt="Kopcarq Logo" width={150} height={150}
-                    className={`h-min w-fit md:h-full md:w-fit top-0 left-0 relative rounded-br-md`} />
+                <div className={`h-3/4 w-full top-0 left-0 relative rounded-br-md bg-kopcarqblanco bg-center bg-contain bg-no-repeat`} />
             </a>
 
             <div className={`bg-red-500 flex m-0 top-0 right-0 absolute pl-3 justify-center items-center rounded-bl-md md:hidden 
@@ -42,8 +41,8 @@ export default function Navbar() {
                     NOSOTROS
                 </a>
 
-                <a href='#contactoRef' onClick={toggleNav} className="flex-1 max-h-14 md:h-auto font-bold transition-all duration-400 hover:scale-150">
-                    <span className="md:py-1 px-3 md:bg-red-500 hover:ease-in-out hover:border-solid hover:border-collapse ">
+                <a href='#contactoRef' onClick={toggleNav} className="flex-1 max-h-14 h-auto font-bold transition-all duration-400 hover:scale-150">
+                    <span className="md:py-1 py-3 px-6 md:px-3 bg-red-500 hover:ease-in-out hover:border-solid hover:border-collapse ">
                         CONTACTO
                     </span>
                 </a>

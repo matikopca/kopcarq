@@ -70,8 +70,8 @@ export default function Coverflow() {
     }
 
     return (
-        <div className={`container my-4 left-0 h-full w-full md:w-2/3 md:px-4 md:absolute bg-transparent`}>
-            <div className="coverflow h-full w-full md:top-1/4" ref={el}>
+        <div className={`container left-0 h-[90%] absolute top-[-100px] w-full md:top-0 md:h-full md:w-2/3 md:relative bg-transparent`}>
+            <div className="coverflow h-1/2 w-2/3 md:h-full md:w-full md:top-1/4" ref={el}>
                 {imagestst.map((it, index) =>
                     <div
                         onClick={() => target(index)}
