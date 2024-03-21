@@ -73,15 +73,15 @@ ${prevFormData.email}`,
                             <div className={`z-10 bg-black bg-opacity-70 absolute top-0 left-0 w-full h-full flex items-center justify-start
                              ${inView ? 'animate-fadeUpAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="text-light ml-2 text-white text-2xl p-2 " id="header">
-
                                     <div className="letter-spacing-xs font-bold text-4xl md:text-6xl lg:6xl">
                                         Transformamos espacios
                                     </div>
                                     <div className='letter-spacing-xs mb-8 font-light text-4xl md:text-6xl'>
-                                        con dedicación y creatividad.</div>
-
-                                    <div className="mt-6 font-bold pt-8 md:flex-row lg:justify-left gap-x-3 gap-y-3">
-                                        <a className="btn btn-primary btn-lg text-red-500" href="#nosotrosRef">Conoce mas sobre nosotros! ➔</a>
+                                        con dedicación y creatividad.
+                                    </div>
+                                    <div className="mt-6 font-bold md:flex-row lg:justify-left gap-x-3 gap-y-3">
+                                        <a className="btn btn-primary btn-lg text-red-500" href="#nosotrosRef">Conoce mas sobre nosotros!  </a>
+                                        <span className='bg-red-500 px-2 text-center align-middle content-center'>➔</span>
                                     </div>
 
                                 </div>
@@ -95,37 +95,28 @@ ${prevFormData.email}`,
             <InView>
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
-                        <section id="trabajosRef" className='flex relative h-full bg-white overflow-hidden snap-end justify-center items-baseline'>
-                            <div className={` bg-white bg-opacity-1 relative top-0 right-0 w-full h-full flex items-center justify-center
+                        <section id="trabajosRef" className='h-full relative overflow-hidden snap-start'>
+                            <div className={`z-10 bg-white absolute top-0 left-0 w-full h-full flex items-center justify-start
                                          ${inView ? 'animate-fadeToRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
-                                <div className="text-light text-red-500 absolute top-20 md:left-10 p-8 row items-center" id="header">
-                                    {/* <div className="p-8 row items-center"> */}
-                                    <h1 className="letter-spacing-xs font-bold text-4xl md:text-6xl lg:6xl">
+                                <div className="text-light absolute top-[10%] ml-2 text-black text-2xl p-2 ">
+                                    <div className="letter-spacing-xs font-bold text-4xl md:text-6xl lg:6xl">
                                         Trabajos
-                                    </h1>
-                                    <h3 className='letter-spacing-xs mb-8 font-light text-4xl md:text-4xl'>
+                                    </div>
+                                    <div className='letter-spacing-xs mb-8 font-light text-4xl md:text-6xl'>
                                         Encontra la solución que buscas.
-                                    </h3>
+                                    </div>
                                 </div>
-                                <div className='flex flex-col h-full w-full md:flex-row'>
-                                    <Coverflow />
 
-                                    <ul className="flex flex-col flex-1 absolute bottom-24 md:top-0 md:relative justify-center w-full list-disc text-red-500 pl-4">
+                                <div className='flex relative flex-col h-full w-full md:flex-row'>
+                                    <Coverflow />
+                                    <ul className="flex flex-col relative justify-center mt-4 ml-6 w-full list-disc text-black">
                                         <li>Remodelaciones integrales de hogares y comercios</li>
                                         <li>Reparaciones estructurales y estéticas</li>
                                         <li>Diseño arquitectónico personalizado</li>
                                         <li>Asesoramiento en selección de materiales y colores</li>
-                                        {/* Add more specific services as needed */}
                                     </ul>
-                                    {/* </div> */}
                                 </div>
-
-
                             </div>
-
-                            {/* <Coverflow imagestst={imagestst} /> */}
-                            {/* <Coverflow /> */}
-
                         </section >
                     </div>
                 )}

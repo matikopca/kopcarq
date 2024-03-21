@@ -1,95 +1,88 @@
 'use client'
-import React, { useEffect, useRef, useState } from "react";
-import { Turn as Hamburger } from 'hamburger-react'
+import { useEffect, useRef } from "react";
+import { InView } from "react-intersection-observer";
+// const ITEM_DISTANCE = 250;
+// const ITEM_ANGLE = -45;
+// const CENTER_ITEM_POP = 500;
+// const CENTER_ITEM_DISTANCE = 80;
 
-export default function Navbar2() {
+const ITEM_DISTANCE = 200;
+const ITEM_ANGLE = -45;
+const CENTER_ITEM_POP = 400;
+const CENTER_ITEM_DISTANCE = 80;
 
-  const [isOpen, setOpen] = useState(false)
-  const toggleNav = () => { setOpen(false) }
 
+export default function Coverflow() {
+  ;
+  // const Coverflow = (props: { imagestst: string[] }) => {
+  const imagestst = [
+    '/edif1.jpg',
+    '/edif2.jpg',
+    '/edif3.jpg',
+    '/int2.png',
+  ];
 
-  const [currentSection, setCurrentSection] = useState('');
-  const navbarRef = useRef<HTMLDivElement>(null);
+  const el = useRef<HTMLDivElement>(null);
 
+  // Help function to set element style transform property
+  function setTransform(el: HTMLDivElement | any, xpos: number, ypos: number, zpos: number, yAngle: number) {
+    el.style.transform = `translateX(${xpos}px) translateY(${ypos}px) translateZ(${zpos}px) rotateY(${yAngle}deg)`;
+  }
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setCurrentSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.8 } // Adjust the threshold as needed
-    );
+    target(Math.floor(imagestst.length * 0.5));
+  }, [imagestst]);
 
-    // Observe each section
-    document.querySelectorAll('section').forEach((section) => {
-      observer.observe(section);
-    });
+  // Target an item, bring it to center
+  function target(index: number) {
+    const items = el.current!.children;
+    // Assuming 'index' is the current index of the clicked item
+    const lastIndex = items.length - 1;
 
-    return () => observer.disconnect(); // Cleanup
-  }, []);
+    for (let i = 0; i < items.length; i++) {
+      let item = items[i] as HTMLDivElement;
 
-  useEffect(() => {
-    // Change background image based on currentSection
-    if (navbarRef.current) {
-      navbarRef.current.style.backgroundImage = `url(${getImageForSection(currentSection)})`;
+      // Center item position and angle
+      if (i === index) {
+        setTransform(item, 0, 30, CENTER_ITEM_POP, 0);
+
+        if (index === 0) {
+          // If the first item is clicked, set the last item to the left
+          //setTransform(items[lastIndex], -ITEM_DISTANCE, 30, 0, -ITEM_ANGLE);
+          let item = items[lastIndex] as HTMLDivElement
+          setTransform(item, -ITEM_DISTANCE, 30, 0, -ITEM_ANGLE);
+        } else if (index === lastIndex) {
+          // If the last item is clicked, set the first item to the right
+          let item = items[0] as HTMLDivElement
+          setTransform(item, ITEM_DISTANCE, 30, 0, ITEM_ANGLE);
+        }
+      }
+      // Left items position and angle
+      else if (i === (index - 1 + items.length) % items.length) {
+        setTransform(item, -ITEM_DISTANCE, 30, 0, -ITEM_ANGLE);
+      }
+      // Right items position and angle
+      else if (i === (index + 1) % items.length) {
+        setTransform(item, ITEM_DISTANCE, 30, 0, ITEM_ANGLE);
+      } else {
+        setTransform(item, 0, 0, 0, 0);
+      }
     }
-  }, [currentSection]);
-
-  const getImageForSection = (sectionId: string) => {
-    // Define your logic to map section IDs to background images
-    switch (sectionId) {
-      case 'headerRef':
-        return 'kopcarqrosroj.png';
-      case 'trabajosRef':
-        return 'kopcarqnegro.png';
-      case 'nosotrosRef':
-        return 'kopcarqblanco.png';
-      case 'contactoRef':
-        return 'kopcarqblanco.png';
-    }
-  };
+  }
 
   return (
-    // <div className="z-50 grid grid-cols-4 h-20 w-full bg-gradient-to-b border-b-2 outline-black outline-1.5 outline border-b-amber-500 from-red-950 bg-red-600 text-white sticky overflow-hidden">
-    <div className={`z-50 visible flex justify-between items-center w-full absolute overflow-hidden text-white md:h-16  md:bg-black md:bg-opacity-60
-    ${isOpen ? "absolute top-0 h-screen bg-black transition-all ease-in duration-700" : "transition-all ease-out duration-500 w-0 h-16"} `}>
-
-      <a href='#headerRef' onClick={toggleNav}
-        className={`h-full w-1/2 items-center relative flex justify-center md:p-0 md:flex-1 md:w-10/12 text-center
-        ${isOpen ? "absolute top-0 p-0" : ""} `}>
-        <div ref={navbarRef} className={`h-3/4 w-full top-0 left-0 relative rounded-br-md bg-center bg-contain bg-no-repeat`} />
-      </a>
-
-      <div className={`bg-red-500 flex m-0 top-0 right-0 absolute pl-3 justify-center items-center rounded-bl-md md:hidden 
-        ${isOpen ? "absolute h-16 top-0 right-0" : "h-16"} `}>
-        <Hamburger toggled={isOpen} toggle={setOpen} direction="left" />
+    <div className={`container left-0 h-[90%] absolute top-[-100px] w-full md:top-0 md:h-full md:w-2/3 md:relative bg-transparent`}>
+      <div className="coverflow h-1/2 w-2/3 md:h-full md:w-full md:top-1/4" ref={el}>
+        {imagestst.map((it, index) =>
+          <div
+            onClick={() => target(index)}
+            key={index}
+            style={{ backgroundImage: `url(${it})` }}
+            className='coverflow-item max-w-full max-h-3/5 md:h-[350px] md:max-h-[0.5] md:w-[550px] md:top-0 md:absolute'>
+          </div>)
+        }
       </div>
-
-      <div className={`-z-10  flex flex-col h-0 w-0 overflow-hidden relative text-center justify-center items-center rounded-bl-[50px]
-        md:w-screen md:h-16 md:top-0 md:right-0 md:rounded-none md:flex-row md:flex-[5-0-0] 
-        ${isOpen ? "transition-none ease-in duration-300 top-0 right-0 h-screen w-screen rounded-bl-none" :
-          "transition-none ease-out duration-700 -top-5"}`} >
-
-        <a href='#trabajosRef' onClick={toggleNav}
-          className="flex-1 max-h-14 md:h-auto font-bold hover:text-red-500 hover:ease-in-out hover:rounded-b-2xl hover:border-solid hover:border-collapse transition-all duration-400 hover:scale-150">
-          TRABAJOS
-        </a>
-
-        <a href='#nosotrosRef' onClick={toggleNav}
-          className="flex-1 max-h-14 md:h-auto font-bold hover:text-red-500 hover:ease-in-out hover:rounded-b-2xl hover:border-solid hover:border-collapse transition-all duration-400 hover:scale-150">
-          NOSOTROS
-        </a>
-
-        <a href='#contactoRef' onClick={toggleNav} className="flex-1 max-h-14 h-auto font-bold transition-all duration-400 hover:scale-150">
-          <span className="md:py-1 py-3 px-6 md:px-3 bg-red-500 hover:ease-in-out hover:border-solid hover:border-collapse ">
-            CONTACTO
-          </span>
-        </a>
-
-      </div >
-    </div >
+    </div>
   )
 }
+
+// export default Coverflow;

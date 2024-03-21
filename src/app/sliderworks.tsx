@@ -70,14 +70,17 @@ export default function Coverflow() {
     }
 
     return (
-        <div className={`container left-0 h-[90%] absolute top-[-100px] w-full md:top-0 md:h-full md:w-2/3 md:relative bg-transparent`}>
-            <div className="coverflow h-1/2 w-2/3 md:h-full md:w-full md:top-1/4" ref={el}>
+        <div className={`container flex relative justify-center items-center max-w-full w-full left-0 h-[60%] top-0 md:top-0 md:h-full md:w-2/3 md:relative bg-transparent`}>
+            <div className="coverflow flex justify-center absolute top-[60%] h-1/2 w-2/3 md:h-full md:w-full md:top-1/4" ref={el}>
                 {imagestst.map((it, index) =>
                     <div
                         onClick={() => target(index)}
                         key={index}
                         style={{ backgroundImage: `url(${it})` }}
-                        className='coverflow-item max-w-full max-h-3/5 md:h-[350px] md:max-h-[0.5] md:w-[550px] md:top-0 md:absolute'>
+                        // className='coverflow-item max-w-full h-48 md:h-[350px] md:max-h-[0.5] md:w-[550px] md:top-0 md:absolute'
+                        className="coverflow-item absolute origin-center h-[200px] w-[350px] max-w-full md:h-[350px] md:w-[550px] 
+                        border-2 border-red-600 rounded-lg bg-no-repeat bg-cover bg-center 
+                        transition-all duration-500 ease-out">
                     </div>)
                 }
             </div>
