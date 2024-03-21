@@ -11,18 +11,19 @@ export default function Navbar() {
     const [currentSection, setCurrentSection] = useState('');
     const navbarRef = useRef<HTMLDivElement>(null);
 
-    const [bglogo, setBgLogo] = useState('kopcarqrosroj.png');
+    const [bglogo, setBgLogo] = useState('bg-kopcarqrosroj');
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
+                        console.log(entry.target.id)
                         setCurrentSection(entry.target.id);
                     }
                 });
             },
-            { threshold: 1 } // Adjust the threshold as needed
+            { threshold: 0.7 } // Adjust the threshold as needed
         );
         // Observe each section
         document.querySelectorAll('section').forEach((section) => {
@@ -45,6 +46,9 @@ export default function Navbar() {
             case 'contactoRef':
                 setBgLogo('bg-kopcarqblanco');
                 break; //'kopcarqblanco.png';
+            // default:
+            //     setBgLogo('bg-kopcarqrosroj')
+            //     console.log(currentSection)
         }
     }, [currentSection]);
 
@@ -59,7 +63,7 @@ export default function Navbar() {
             <a href='#headerRef' onClick={toggleNav}
                 className={`h-full w-1/2 items-center relative flex justify-center md:p-0 md:flex-1 md:w-10/12 text-center
             ${isOpen ? "absolute top-0 p-0" : ""} `}>
-                <div className={`h-3/4 w-full top-0 left-0 relative rounded-br-md transition-all ease-in-out duration-600
+                <div className={`h-3/4 w-[92%] top-0 left-0 relative rounded-br-md transition-all ease-in-out duration-600
                 bg-center bg-contain bg-no-repeat ${bglogo} md:bg-kopcarqrosroj ${isOpen ? "ml-3 bg-kopcarqrosroj" : ""}`} />
             </a>
 
