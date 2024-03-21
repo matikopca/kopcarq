@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { InView } from 'react-intersection-observer';
 import Coverflow from './sliderworks';
 import Link from 'next/link';
+import Navbar2 from './kopcarq/page';
 
 export default function Home() {
 
@@ -58,6 +59,8 @@ ${prevFormData.email}`,
 
     return (
         <div className='block h-screen max-h-screen relative overflow-y-scroll snap-y snap-mandatory'>
+
+            {/* <Navbar2 /> */}
 
             <InView>
                 {({ inView, ref }) => (
