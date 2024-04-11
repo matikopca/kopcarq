@@ -78,7 +78,7 @@ export default function Coverflow() {
                         key={index}
                         style={{ backgroundImage: `url(${it})` }}
                         // className='coverflow-item max-w-full h-48 md:h-[350px] md:max-h-[0.5] md:w-[550px] md:top-0 md:absolute'
-                        className="coverflow-item absolute origin-center h-[200px] w-[350px] max-w-full md:h-[350px] md:w-[550px] 
+                        className="coverflow-item absolute origin-center h-[200px] w-[350px] max-w-full lg:h-[350px] lg:w-[550px] 
                         border-2 border-red-600 rounded-lg bg-no-repeat bg-cover bg-center 
                         transition-all duration-500 ease-out">
                     </div>)

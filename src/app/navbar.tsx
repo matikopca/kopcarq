@@ -41,7 +41,7 @@ export default function Navbar() {
                 setBgLogo('bg-kopcarqnegro');
                 break; //'kopcarqnegro.png';
             case 'nosotrosRef':
-                setBgLogo('bg-kopcarqblanco');
+                setBgLogo('bg-kopcarqrosroj');
                 break; //'kopcarqblanco.png';
             case 'contactoRef':
                 setBgLogo('bg-kopcarqblanco');
@@ -64,7 +64,7 @@ export default function Navbar() {
                 className={`h-full w-1/2 items-center relative flex justify-center md:p-0 md:flex-1 md:w-10/12 text-center
             ${isOpen ? "absolute top-0 p-0" : ""} `}>
                 <div className={`h-3/4 w-[92%] top-0 left-0 relative rounded-br-md transition-all ease-in-out duration-600
-                bg-center bg-contain bg-no-repeat ${bglogo} md:bg-kopcarqrosroj ${isOpen ? "ml-3 bg-kopcarqrosroj" : ""}`} />
+                bg-left bg-contain bg-no-repeat ${bglogo} md:bg-kopcarqrosroj ${isOpen ? "ml-3 bg-kopcarqrosroj" : ""}`} />
             </a>
 
             <div className={`bg-red-500  flex m-0 top-0 right-0 absolute w-16 justify-center items-center rounded-bl-md md:hidden 
