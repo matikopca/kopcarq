@@ -96,8 +96,7 @@ ${prevFormData.email}`,
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
                         <section id="trabajosRef" className='h-full relative overflow-hidden snap-start'>
-                            <div className={`z-10 bg-white absolute top-0 left-0 w-full h-full flex items-center justify-start
-                                         ${inView ? 'animate-fadeToRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
+                            <div className={`z-10 bg-white absolute top-0 left-0 w-full h-full flex items-center justify-start`}>
                                 <div className="text-light absolute top-[10%] ml-2 text-black text-2xl p-2 ">
                                     <div className="letter-spacing-xs font-bold text-4xl md:text-6xl lg:6xl">
                                         Trabajos
@@ -107,7 +106,7 @@ ${prevFormData.email}`,
                                     </div>
                                 </div>
 
-                                <div className='flex relative flex-col h-full w-full md:flex-row'>
+                                <div className={`flex relative flex-col h-full w-full md:flex-row  ${inView ? 'animate-fadeToRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                     <Coverflow />
                                     <ul className="flex flex-col relative justify-center mt-4 ml-6 w-full md:w-2/4 lg:w-2/3 list-disc text-black">
                                         <li>Remodelaciones integrales de hogares y comercios</li>
@@ -160,40 +159,42 @@ ${prevFormData.email}`,
                                 </div>
                             </div>
 
-                            <div className='z-20 md:z-0 flex flex-col mt-[15%] md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] md:bg-gradient-to-r from-zinc-700 via-zinc-800  to-black from-70%'>
-                                <h1 className="self-start letter-spacing-xs md:mt-20 box-border font-extrabold text-4xl lg:text-6xl text-white">
+                            <div className='z-20 md:z-0 flex flex-col md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'>
+                                <h1 className="self-start letter-spacing-xs mt-14 md:mt-20 box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
                                     Contacto
                                 </h1>
-                                <h3 className='self-start text-2xl md:text-3xl text-white font-medium flex'>
+                                <h3 className='self-start text-2xl md:text-3xl text-zinc-800 font-medium flex'>
                                     Dejanos tu mensaje, te respondemos a la brevedad.
                                 </h3>
-                                <form className='flex flex-col box-border md:mt-8 items-center justify-center text-black md:text-red-500 text-2xl  rounded-md w-full h-auto'>
+                                <form className='flex flex-col box-border pt-3 md:pt-4 items-center justify-center text-red-500 text-2xl  rounded-md w-full h-auto'>
                                     <div className='flex flex-1 flex-col w-full h-auto align-middle'>
-                                        <div className='flex flex-col my-2 md:my-4 md:flex-row'>
-                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium' htmlFor="nombre">Nombre:</label>
-                                            <input className='flex-[4-0-0] border-red-500 border-2 text-xl text-black rounded-md h-10 md:max-w-[600px] md:ml-2 ' type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
+                                        <div className='flex flex-col py-2 md:flex-row'>
+                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="nombre">NOMBRE:</label>
+                                            <input className='flex-[4-0-0] border-red-500 border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2'
+                                                type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} placeholder='Ingresa tu nombre' required />
                                         </div>
-                                        <div className='flex flex-col my-2 md:my-4 md:flex-row'>
-                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium' htmlFor="email">Email:</label>
-                                            <input className='flex-[4-0-0] border-red-500 border-2 text-xl text-black rounded-md h-10 md:max-w-[600px] md:ml-2 ' type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
+                                        <div className='flex flex-col py-2 md:flex-row'>
+                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="email">EMAIL:</label>
+                                            <input className='flex-[4-0-0] border-red-500  border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2 '
+                                                type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder='Ingresa tu correo' required />
                                         </div>
-                                        <div className='flex flex-col my-2 md:my-4 md:flex-row'>
-                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium' htmlFor="necesito">Necesito:</label>
-                                            <select className='flex-[4-0-0] border-red-500 border-2 text-xl text-black rounded-md h-10 md:max-w-[600px] md:ml-2 ' id="necesito" name="necesito" onChange={handleChange}>
-                                                <option value="">Choose an option</option>
+                                        <div className='flex flex-col py-2 md:flex-row'>
+                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="necesito">NECESITO:</label>
+                                            <select className='flex-[4-0-0] border-red-500 border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2 ' id="necesito" name="necesito" onChange={handleChange}>
+                                                <option value="" disabled selected>Seleccione</option>
                                                 <option value="Planos">Planos</option>
                                                 <option value="Obra">Obra</option>
                                             </select>
                                         </div>
-                                        <div className='flex flex-col box-border my-2 md:my-4 md:flex-row'>
+                                        <div className='flex flex-col box-border py-2 md:flex-row'>
                                             {formData.necesito === "Obra" && (
-                                                <label className='flex-1 max-w-[120px] h-10 text-xl font-medium' htmlFor="necesito2">Tipo:</label>
+                                                <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="necesito2">TIPO:</label>
                                             )
                                             }
                                             {formData.necesito === "Obra" && (
                                                 <select id="necesito2" name="necesito2" onChange={handleChange}
-                                                    className='flex-[4-0-0] border-red-500 border-2 text-xl text-black rounded-md h-10 md:max-w-[600px] md:ml-2'>
-                                                    <option value="">Seleccione</option>
+                                                    className='flex-[4-0-0] border-red-500  border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2'>
+                                                    <option value="" disabled selected>Seleccione</option>
                                                     <option value="Construcción">Construcción</option>
                                                     <option value="Remodelación">Remodelación</option>
                                                     <option value="Reparación">Reparación</option>
@@ -202,16 +203,16 @@ ${prevFormData.email}`,
                                             }
                                         </div>
                                     </div>
-                                    <div className='flex flex-[2-0-0] box-border my-2 md:my-4 flex-col h-auto w-full '>
+                                    <div className='flex flex-[2-0-0] box-border py-4 flex-col h-auto w-full '>
                                         <label className='relative left-0 h-10 font-medium' htmlFor="descripcion">Contanos mas!:</label>
                                         <div className='flex justify-center w-full h-[70%]'>
                                             <textarea
-                                                className='align-text-top border-red-500 border-2 text-xl text-black h-auto resize-none min-h-40 overflow-y-auto w-full rounded-md'
+                                                className='align-text-top border-red-500 border-2 text-xl text-black h-auto resize-none min-h-40 outline-none overflow-y-auto w-full rounded-md'
                                                 id="descripcion" name="descripcion" value={formData.descripcion} onChange={handleChange} />
                                         </div>
                                     </div>
 
-                                    <div className='relative justify-end items-baseline mt-2 md:mt-8'>
+                                    <div className='relative pt-2'>
                                         <a className=' text-white border-2 border-white rounded-md font-medium box-border   bg-red-500 px-7 py-1 align-middle'
                                             href={`https://wa.me/+5493416289174/?text=${encodeURIComponent(formData.message)}`}
                                             target="_blank"
@@ -219,7 +220,7 @@ ${prevFormData.email}`,
                                         >Enviar</a>
                                     </div>
                                 </form>
-                                <div className='flex flex-col md:flex-row float-end absolute bottom-0 bg-transparent h-[8%] w-[95%] justify-around items-center shadow-[0px -5px 20px 4px] rounded-t-2xl shadow-black text-white'>
+                                <div className='flex flex-col md:flex-row float-end absolute bottom-0 bg-transparent h-[8%] w-[95%] justify-around items-center shadow-[0px -5px 20px 4px] rounded-t-2xl shadow-black  text-zinc-900'>
                                     <h3 className='text-lg font-medium flex h-full items-center'>
                                         <svg viewBox="0 0 24 24" fill="rgb(239 68 68)" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg" className="mr-1">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">

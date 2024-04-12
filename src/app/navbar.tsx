@@ -38,13 +38,13 @@ export default function Navbar() {
                 setBgLogo('bg-kopcarqrosroj');
                 break; //'kopcarqrosroj.png';
             case 'trabajosRef':
-                setBgLogo('bg-kopcarqnegro');
+                setBgLogo('bg-kopcarqrosroj');
                 break; //'kopcarqnegro.png';
             case 'nosotrosRef':
                 setBgLogo('bg-kopcarqrosroj');
                 break; //'kopcarqblanco.png';
             case 'contactoRef':
-                setBgLogo('bg-kopcarqblanco');
+                setBgLogo('bg-kopcarqrosroj');
                 break; //'kopcarqblanco.png';
             // default:
             //     setBgLogo('bg-kopcarqrosroj')
