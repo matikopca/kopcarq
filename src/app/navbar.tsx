@@ -12,6 +12,8 @@ export default function Navbar() {
     const navbarRef = useRef<HTMLDivElement>(null);
 
     const [bglogo, setBgLogo] = useState('bg-kopcarqrosroj');
+    const [bgnavbar, setBgNavbar] = useState('bg-transparent');
+
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -36,15 +38,19 @@ export default function Navbar() {
         switch (currentSection) {
             case 'headerRef':
                 setBgLogo('bg-kopcarqrosroj');
+                setBgNavbar('bg-black bg-opacity-70');
                 break; //'kopcarqrosroj.png';
             case 'trabajosRef':
                 setBgLogo('bg-kopcarqrosroj');
+                setBgNavbar('bg-white');
                 break; //'kopcarqnegro.png';
             case 'nosotrosRef':
                 setBgLogo('bg-kopcarqrosroj');
+                setBgNavbar('bg-black bg-opacity-70');
                 break; //'kopcarqblanco.png';
             case 'contactoRef':
                 setBgLogo('bg-kopcarqrosroj');
+                setBgNavbar('bg-white')
                 break; //'kopcarqblanco.png';
             // default:
             //     setBgLogo('bg-kopcarqrosroj')
@@ -58,7 +64,7 @@ export default function Navbar() {
     return (
         // <div className="z-50 grid grid-cols-4 h-20 w-full bg-gradient-to-b border-b-2 outline-black outline-1.5 outline border-b-amber-500 from-red-950 bg-red-600 text-white sticky overflow-hidden">
         <div className={`z-50 visible flex justify-between items-center w-full absolute overflow-hidden text-white md:h-16  md:bg-black md:bg-opacity-80
-        ${isOpen ? "absolute top-0 h-screen bg-black transition-all ease-in duration-700" : "transition-all ease-out duration-500 w-0 h-16"} `}>
+        ${isOpen ? "absolute top-0 h-screen bg-black transition-all ease-in duration-700" : `${bgnavbar} transition-all ease-out duration-500 w-0 h-16`}  `}>
 
             <a href='#headerRef' onClick={toggleNav}
                 className={`h-full w-1/2 items-center relative flex justify-center md:p-0 md:flex-1 md:w-10/12 text-center

@@ -150,23 +150,23 @@ ${prevFormData.email}`,
             <InView>
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
-                        <section id="contactoRef" className='flex flex-col relative h-full bg-red-500 bg-opacity-1 overflow-hidden snap-end'>
+                        <section id="contactoRef" className='flex flex-col relative h-full bg-red-500 bg-opacity-1 overflow-hidden overflow-y-scroll snap-end'>
                             <div className={`z-10 flex-1 relative md:absolute top-0 right-0 w-full items-center justify-center md:w-[15%] md:h-full
                              ${inView ? 'animate-fadeBottomAnimation 4s ease-in-out visible' : 'hidden'}`}>
+
                                 <div className="hidden md:flex absolute bottom-10 md:ml-4 md:relative text-light text-white h-full" id="header">
                                     <div className='bg-kopcarqnegro bg-contain bg-no-repeat absolute bottom-0 right-0 h-[110px] w-[600px] -rotate-90 translate-x-full origin-bottom-left' />
                                 </div>
                             </div>
-
                             {/* <div className='z-20 md:z-0 flex flex-col md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'> */}
-                            <div className='z-20 md:z-0 block md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'>
-                                <h1 className="self-start pt-12 md:pt-6 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
+                            <div className='z-20 md:z-0 flex flex-col justify-end md:mt-0 relative box-border md:content-around h-auto md:h-screen w-screen md:items-center md:w-[85%] bg-white'>
+                                <h1 className="self-start px-6 pt-16 md:pt-8 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
                                     Contacto
                                 </h1>
-                                <h3 className='self-start text-2xl md:text-3xl text-zinc-800 font-medium flex'>
+                                <h3 className='self-start px-6 text-2xl md:text-3xl text-zinc-800 font-medium flex'>
                                     Dejanos tu mensaje, te respondemos a la brevedad.
                                 </h3>
-                                <form className='flex flex-col box-border pt-3 md:pt-4 items-center justify-center text-red-500 text-2xl  rounded-md w-full h-auto'>
+                                <form className='flex flex-col box-border pt-3 px-6 md:pt-4 items-center justify-center text-red-500 text-2xl  rounded-md w-full h-auto'>
                                     <div className='flex flex-1 flex-col w-full h-auto align-middle'>
                                         <div className='flex flex-col py-2 md:flex-row'>
                                             <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="nombre">NOMBRE:</label>
@@ -188,12 +188,11 @@ ${prevFormData.email}`,
                                                 <option value="Obra" className='text-black'>Obra</option>
                                             </select>
                                         </div>
-                                        <div className='flex flex-col box-border py-2 md:flex-row'>
-                                            {formData.necesito === "Obra" && (
+
+                                        {formData.necesito === "Obra" && (
+                                            <div className='flex flex-col box-border py-2 md:flex-row'>
+
                                                 <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="necesito2">TIPO:</label>
-                                            )
-                                            }
-                                            {formData.necesito === "Obra" && (
                                                 <select id="necesito2" name="necesito2" onChange={handleChange}
                                                     className={`flex-[4-0-0] border-red-500 border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2 
                                                 ${formData.necesito2 === "" ? 'text-gray-400' : 'text-black'}`}>
@@ -202,9 +201,10 @@ ${prevFormData.email}`,
                                                     <option value="Remodelación" className='text-black'>Remodelación</option>
                                                     <option value="Reparación" className='text-black'>Reparación</option>
                                                 </select>
-                                            )
-                                            }
-                                        </div>
+                                            </div>
+                                        )
+                                        }
+
                                     </div>
                                     <div className='flex flex-[2-0-0] box-border py-4 flex-col h-auto w-full '>
                                         <label className='relative left-0 h-10 font-medium' htmlFor="descripcion">Contanos mas!:</label>
@@ -215,7 +215,7 @@ ${prevFormData.email}`,
                                         </div>
                                     </div>
 
-                                    <div className='relative pt-2'>
+                                    <div className='relative pt-2 pb-4'>
                                         <a className=' text-white border-2 border-white rounded-md font-medium box-border   bg-red-500 px-7 py-1 align-middle'
                                             href={`https://wa.me/+5493416289174/?text=${encodeURIComponent(formData.message)}`}
                                             target="_blank"
@@ -223,7 +223,8 @@ ${prevFormData.email}`,
                                         >Enviar</a>
                                     </div>
                                 </form>
-                                <div className='flex flex-col relative h-auto w-full pt-8 box-border md:flex-row bg-transparent justify-around items-center shadow-[0px -5px 20px 4px] rounded-t-2xl shadow-black  text-zinc-900'>
+
+                                <div className='flex flex-col relative h-auto w-full py-6 md:py-2 box-border md:flex-row bg-zinc-900 justify-around items-center shadow-[0px -5px 20px 4px]  shadow-black  text-white'>
                                     <h3 className='text-lg font-medium flex h-full items-center'>
                                         <svg viewBox="0 0 24 24" fill="rgb(239 68 68)" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg" className="mr-1">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
@@ -250,7 +251,7 @@ ${prevFormData.email}`,
                                         +54 341 6 289174
                                     </h3>
                                     <h3 className='text-lg font-medium flex h-full items-center'>
-                                        <svg viewBox="0 0 24 24" fill="transparent" height="40px" width="40px" xmlns="http://www.w3.org/2000/svg">
+                                        <svg viewBox="0 0 24 24" fill="transparent" height="35px" width="35px" xmlns="http://www.w3.org/2000/svg">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
                                                 <path d="M12 21C15.5 17.4 19 14.1764 19 10.2C19 6.22355 15.866 3 12 3C8.13401 3 5 6.22355 5 10.2C5 14.1764 8.5 17.4 12 21Z" stroke="rgb(239 68 68)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                                 <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="rgb(239 68 68)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
