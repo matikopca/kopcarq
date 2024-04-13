@@ -49,13 +49,43 @@ ${prevFormData.email}`,
         setFormData({ ...formData, [name]: value });
     };
 
-    // Función para manejar el envío del formulario
-    const handleSubmit = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        // Aquí puedes enviar los datos del formulario a donde sea necesario
-        console.log(formData);
-    };
+    const handleEnviarClick = () => {
+        // Check if form fields are filled
+        if (!formData.nombre) {
+            alert('Por favor, complete su nombre.');
+            return
+        }
+        if (!formData.email) {
+            alert('Por favor, complete su email.');
+            return
+        }
+        else {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(formData.email)) {
+                alert('Por favor, ingrese un correo electrónico válido.')
+                return;
+            }
 
+        }
+
+        if (!formData.necesito) {
+            alert('Por favor, indique que tipo de servicio necesita.');
+            return
+        }
+        if (formData.necesito === "Obra" && !formData.necesito2) {
+            alert('Por favor, especifique el tipo de obra.');
+            return
+        }
+        if (!formData.descripcion) {
+            alert('Por favor, completa la descripcion para que podamos asesorarte mejor.');
+            return
+        }
+
+        const message = `Hola, mi nombre es ${formData.nombre}. Necesito ${formData.necesito}.`;
+        const whatsappLink = `https://wa.me/+5493416289174/?text=${encodeURIComponent(message)}`;
+
+        window.open(whatsappLink, '_blank');
+    };
 
     return (
         <div className='block h-screen max-h-screen relative overflow-y-scroll snap-y snap-mandatory'>
@@ -160,7 +190,7 @@ ${prevFormData.email}`,
                             </div>
                             {/* <div className='z-20 md:z-0 flex flex-col md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'> */}
                             <div className='z-20 md:z-0 flex flex-col justify-end md:mt-0 relative box-border md:content-around h-auto md:h-screen w-screen md:items-center md:w-[85%] bg-white'>
-                                <h1 className="self-start px-6 pt-16 md:pt-8 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
+                                <h1 className="self-start px-6 pt-16 md:pt-12 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
                                     Contacto
                                 </h1>
                                 <h3 className='self-start px-6 text-2xl md:text-3xl text-zinc-800 font-medium flex'>
@@ -216,10 +246,8 @@ ${prevFormData.email}`,
                                     </div>
 
                                     <div className='relative pt-2 pb-4'>
-                                        <a className=' text-white border-2 border-white rounded-md font-medium box-border   bg-red-500 px-7 py-1 align-middle'
-                                            href={`https://wa.me/+5493416289174/?text=${encodeURIComponent(formData.message)}`}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+                                        <a className=' text-white border-2 border-white rounded-md font-medium box-border   bg-red-500 px-7 py-1 align-middle cursor-pointer'
+                                            onClick={handleEnviarClick}
                                         >Enviar</a>
                                     </div>
                                 </form>
