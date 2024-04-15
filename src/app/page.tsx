@@ -189,7 +189,7 @@ ${prevFormData.email}`,
                                 </div>
                             </div>
                             {/* <div className='z-20 md:z-0 flex flex-col md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'> */}
-                            <div className='z-20 md:z-0 flex flex-col justify-start md:mt-0 relative box-border md:content-around h-auto md:h-screen w-screen md:items-center md:w-[85%] bg-white'>
+                            <div className='z-20 md:z-0 flex flex-col justify-start md:mt-0 relative box-border md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'>
                                 <h1 className="self-start px-6 pt-16 md:pt-20 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
                                     Contacto
                                 </h1>
