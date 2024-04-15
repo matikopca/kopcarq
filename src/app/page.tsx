@@ -189,8 +189,8 @@ ${prevFormData.email}`,
                                 </div>
                             </div>
                             {/* <div className='z-20 md:z-0 flex flex-col md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'> */}
-                            <div className='z-20 md:z-0 flex flex-col justify-end md:mt-0 relative box-border md:content-around h-auto md:h-screen w-screen md:items-center md:w-[85%] bg-white'>
-                                <h1 className="self-start px-6 pt-16 md:pt-12 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
+                            <div className='z-20 md:z-0 flex flex-col justify-start md:mt-0 relative box-border md:content-around h-auto md:h-screen w-screen md:items-center md:w-[85%] bg-white'>
+                                <h1 className="self-start px-6 pt-16 md:pt-20 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
                                     Contacto
                                 </h1>
                                 <h3 className='self-start px-6 text-2xl md:text-3xl text-zinc-800 font-medium flex'>
@@ -252,7 +252,7 @@ ${prevFormData.email}`,
                                     </div>
                                 </form>
 
-                                <div className='flex flex-col relative h-auto w-full py-6 md:py-2 box-border md:flex-row bg-zinc-900 justify-around items-center shadow-[0px -5px 20px 4px]  shadow-black  text-white'>
+                                <div className='flex flex-col absolute bottom-0 h-auto w-full py-6 md:py-2 box-border md:flex-row bg-zinc-900 justify-around items-center shadow-[0px -5px 20px 4px]  shadow-black  text-white'>
                                     <h3 className='text-lg font-medium flex h-full items-center'>
                                         <svg viewBox="0 0 24 24" fill="rgb(239 68 68)" height="30px" width="30px" xmlns="http://www.w3.org/2000/svg" className="mr-1">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier">
