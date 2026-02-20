@@ -49,9 +49,7 @@ export default function Navbar() {
             <div className={`flex items-center justify-between w-full ${isOpen ? 'h-16 flex-shrink-0' : 'h-full'}`}>
                 {/* Logo */}
                 <a href='#headerRef' onClick={toggleNav} className="relative h-10 w-40 flex items-center">
-                    <div className={`h-full w-full bg-contain bg-no-repeat bg-left transition-all duration-300
-                        ${isLight || scrolled || isOpen ? 'bg-kopcarqnegro' : 'bg-kopcarqrosroj'}
-                    `} />
+                    <div className="h-full w-full bg-contain bg-no-repeat bg-left transition-all duration-300 bg-kopcarqrosroj" />
                 </a>
 
                 {/* Desktop nav links */}

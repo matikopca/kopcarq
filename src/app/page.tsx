@@ -10,6 +10,27 @@ export default function Home() {
 
     const [selection, setSelection] = useState('');
     const [showSecondSelect, setShowSecondSelect] = useState(false);
+    const TRABAJOS_KEYS = ['diseno', 'visualizacion', 'soluciones', 'remodelaciones'] as const;
+    const [expandedTrabajos, setExpandedTrabajos] = useState<Record<string, boolean>>({
+        diseno: false,
+        visualizacion: false,
+        soluciones: false,
+        remodelaciones: false,
+    });
+    const [activeCarouselIndex, setActiveCarouselIndex] = useState(0);
+
+    const handleTrabajosExpand = (key: string) => {
+        const index = TRABAJOS_KEYS.indexOf(key as typeof TRABAJOS_KEYS[number]);
+        const isCurrentlyExpanded = expandedTrabajos[key];
+        setExpandedTrabajos({ diseno: false, visualizacion: false, soluciones: false, remodelaciones: false, [key]: !isCurrentlyExpanded });
+        if (!isCurrentlyExpanded) setActiveCarouselIndex(index);
+    };
+
+    const handleCarouselIndexChange = (index: number) => {
+        setActiveCarouselIndex(index);
+        const key = TRABAJOS_KEYS[index];
+        setExpandedTrabajos({ diseno: false, visualizacion: false, soluciones: false, remodelaciones: false, [key]: true });
+    };
 
     const handleFirstSelectChange = (event: { target: { value: any; }; }) => {
         const value = event.target.value;
@@ -89,7 +110,7 @@ ${prevFormData.email}`,
                             <div className="h-full relative top-0 z-0">
                                 <Carousel />
                             </div>
-                            <div className={`z-10 bg-black/50 absolute top-0 left-0 w-full h-full flex items-end pb-24 md:items-center md:pb-0 justify-start
+                            <div className={`z-10 bg-black/50 absolute top-0 left-0 w-full h-full flex items-center justify-center md:items-center md:justify-start
                              ${inView ? 'animate-fadeUpAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="ml-6 md:ml-16 text-white max-w-2xl">
                                     <h1 className="text-balance font-bold text-4xl md:text-6xl leading-tight">
@@ -117,29 +138,50 @@ ${prevFormData.email}`,
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
                         <section id="trabajosRef" className='h-full relative overflow-hidden snap-start'>
-                            <div className="z-10 bg-white absolute top-0 left-0 w-full h-full flex items-center justify-start">
-                                <div className="absolute top-[10%] ml-6 md:ml-16 text-zinc-900">
-                                    <h2 className="font-bold text-4xl md:text-6xl text-balance">
+                            <div className="z-10 bg-white absolute top-0 left-0 w-full h-full flex flex-col overflow-hidden">
+                                <div className="flex-shrink-0 pt-20 md:pt-24 pb-2 px-6 md:px-16 text-zinc-900">
+                                    <h2 className="font-bold text-3xl md:text-5xl text-balance">
                                         Trabajos
                                     </h2>
-                                    <p className='font-light text-xl md:text-2xl mt-2 text-zinc-500'>
+                                    <p className='font-light text-lg md:text-xl mt-1 text-zinc-500'>
                                         Encontra la solucion que buscas.
                                     </p>
                                 </div>
 
-                                <div className={`flex relative flex-col h-full w-full md:flex-row ${inView ? 'animate-fadeToRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
-                                    <Coverflow />
-                                    <ul className="flex flex-col relative justify-center mt-4 ml-6 w-full md:w-2/4 lg:w-2/3 text-zinc-700 gap-3">
-                                        {['Remodelaciones integrales de hogares y comercios',
-                                          'Reparaciones estructurales y esteticas',
-                                          'Diseno arquitectonico personalizado',
-                                          'Asesoramiento en seleccion de materiales y colores'].map((item, i) => (
-                                            <li key={i} className="flex items-start gap-3">
-                                                <span className="mt-1.5 h-2 w-2 rounded-full bg-red-500 flex-shrink-0" />
-                                                <span className="text-base md:text-lg">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                <div className={`flex-1 min-h-0 flex flex-col md:flex-row gap-2 md:gap-4 px-6 md:px-16 ${inView ? 'animate-fadeToRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
+                                    <div className="flex-shrink-0 flex justify-center items-center w-full md:w-2/5 lg:w-1/2 min-h-[200px] md:min-h-[240px]">
+                                        <Coverflow activeIndex={activeCarouselIndex} onIndexChange={handleCarouselIndexChange} />
+                                    </div>
+                                    <div className="flex-1 overflow-y-auto py-2 w-full md:w-2/4 lg:w-2/3 min-h-0">
+                                        <div className="flex flex-col gap-2 text-zinc-700">
+                                            {[
+                                                { key: 'diseno', title: 'Diseño y documentación', items: ['Anteproyecto y proyecto ejecutivo', 'Dirección de obra', 'Cómputo y presupuesto', 'Planos municipales y gestión de permisos', 'Regularización de planos', 'Modelado BIM', 'Planos para PH / subdivisiones'] },
+                                                { key: 'visualizacion', title: 'Visualización y marketing inmobiliario', items: ['Renders hiperrealistas', 'Recorridos virtuales 360°', 'Animaciones 3D', 'Home staging virtual', 'Diseño para inmobiliarias / desarrolladores'] },
+                                                { key: 'soluciones', title: 'Soluciones técnicas', items: ['Diagnóstico estructural', 'Patologías edilicias (grietas, humedad, filtraciones)', 'Informes técnicos para reclamos', 'Asesoramiento pre-compra de propiedades'] },
+                                                { key: 'remodelaciones', title: 'Remodelaciones y mejoras', items: ['Reformas integrales', 'Ampliaciones', 'Diseño de interiores', 'Diseño de iluminación', 'Diseño de cocinas y baños', 'Paisajismo y diseño de exteriores', 'Quinchos y piletas'] },
+                                            ].map(({ key, title, items }) => (
+                                                <div key={key} className="border-b border-zinc-200 last:border-0 pb-2">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => handleTrabajosExpand(key)}
+                                                        className="flex items-center gap-2 w-full text-left hover:opacity-90"
+                                                    >
+                                                        <span className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-red-500 text-white text-sm font-bold rounded">
+                                                            {expandedTrabajos[key] ? '−' : '+'}
+                                                        </span>
+                                                        <h4 className="font-bold text-red-600 text-base">{title}</h4>
+                                                    </button>
+                                                    {expandedTrabajos[key] && (
+                                                        <ul className="mt-2 ml-8 space-y-1 list-disc list-inside marker:text-red-500/70 text-base md:text-lg">
+                                                            {items.map((item) => (
+                                                                <li key={item}>{item}</li>
+                                                            ))}
+                                                        </ul>
+                                                    )}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -155,16 +197,15 @@ ${prevFormData.email}`,
                             <div className={`bg-white/95 backdrop-blur-sm p-10 md:p-16 absolute md:relative top-0 right-0 w-full h-full flex items-center justify-center md:w-2/5
                                 ${inView ? 'animate-fadeRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="max-w-md">
-                                    <div className="w-12 h-1 bg-red-500 rounded-full mb-6" />
-                                    <h2 className="font-bold text-4xl lg:text-5xl text-zinc-900 text-balance">
-                                        Nosotros
+                                    <div className="w-12 h-1 bg-black rounded-full mb-6" />
+                                    <h2 className="font-bold text-4xl lg:text-5xl text-red-500 text-balance">
+                                        Calidad
                                     </h2>
-                                    <h3 className='text-xl md:text-2xl font-medium text-zinc-700 mt-4 text-pretty'>
-                                        Somos una empresa familiar con gran trayectoria en el rubro.
-                                    </h3>
-                                    <p className="mt-6 text-zinc-500 leading-relaxed text-base md:text-lg">
-                                        Con mas de 10 anos en el mercado nos caracterizamos por brindar soluciones a medida y de calidad.
-                                        Queremos que nuestros clientes se sientan acompanados desde el dia 0.
+                                    <p className="mt-3 text-zinc-600 leading-relaxed text-base md:text-lg">
+                                        Buscamos la máxima calidad y la resolución óptima de cada problema.
+                                    </p>
+                                    <p className="mt-6 text-zinc-500 leading-relaxed text-base md:text-lg italic">
+                                        Cada proyecto tiene un alma. Detrás de cada plano hay un arquitecto que piensa el espacio, lo habita en su mente antes de que exista, y trabaja hasta que cada detalle respire esa misma pasión. No diseñamos solo metros cuadrados: diseñamos hogares donde vivir, lugares donde crecer, espacios que cuenten historias. La excelencia no es opcional; es el único camino que conocemos.
                                     </p>
                                 </div>
                             </div>
@@ -248,7 +289,7 @@ ${prevFormData.email}`,
                                     </div>
 
                                     {/* Submit */}
-                                    <div className='pt-2'>
+                                    <div className='pt-2 flex justify-center'>
                                         <button type="button"
                                             className='bg-red-500 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/25 active:scale-95'
                                             onClick={handleEnviarClick}
@@ -263,7 +304,7 @@ ${prevFormData.email}`,
                             <footer className='flex flex-col md:flex-row items-center justify-between w-full px-6 md:px-12 py-6 bg-zinc-50 border-t border-zinc-100 gap-4'>
                                 <div className="flex items-center gap-6 flex-wrap justify-center">
                                     <a href="https://instagram.com/kopcarq" target="_blank" rel="noopener noreferrer"
-                                        className='flex items-center gap-2 text-sm text-zinc-500 hover:text-red-500 transition-colors duration-200'>
+                                        className='flex items-center gap-2 text-base text-red-500 hover:text-red-700 transition-colors duration-200'>
                                         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
                                             <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.5"/>
                                             <circle cx="12" cy="12" r="5" stroke="currentColor" strokeWidth="1.5"/>
@@ -272,7 +313,7 @@ ${prevFormData.email}`,
                                         @kopcarq
                                     </a>
                                     <a href="https://wa.me/+5493416289174" target="_blank" rel="noopener noreferrer"
-                                        className='flex items-center gap-2 text-sm text-zinc-500 hover:text-red-500 transition-colors duration-200'>
+                                        className='flex items-center gap-2 text-base text-red-500 hover:text-red-700 transition-colors duration-200'>
                                         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M17 2H7C4.23858 2 2 4.23858 2 7V17C2 19.7614 4.23858 22 7 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2Z" stroke="currentColor" strokeWidth="1.5"/>
                                             <path d="M12.0371 18.792C10.8838 18.792 9.77025 18.5095 8.77588 18.0011L5.20801 19L6.23213 15.583C5.64551 14.5391 5.31543 13.3442 5.31543 12.0742C5.31543 8.36426 8.32715 5.35254 12.0371 5.35254C15.7471 5.35254 18.7588 8.36426 18.7588 12.0742C18.7588 15.7842 15.7471 18.792 12.0371 18.792Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
