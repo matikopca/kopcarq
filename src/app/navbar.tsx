@@ -3,103 +3,117 @@ import React, { useEffect, useRef, useState } from "react";
 import { Turn as Hamburger } from 'hamburger-react'
 
 export default function Navbar() {
-
     const [isOpen, setOpen] = useState(false)
     const toggleNav = () => { setOpen(false) }
 
-
     const [currentSection, setCurrentSection] = useState('');
-    const navbarRef = useRef<HTMLDivElement>(null);
-
-    const [bglogo, setBgLogo] = useState('bg-kopcarqrosroj');
-    const [bgnavbar, setBgNavbar] = useState('bg-transparent');
-
+    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        console.log(entry.target.id)
                         setCurrentSection(entry.target.id);
                     }
                 });
             },
-            { threshold: 0.7 } // Adjust the threshold as needed
+            { threshold: 0.7 }
         );
-        // Observe each section
         document.querySelectorAll('section').forEach((section) => {
             observer.observe(section);
         });
-        return () => observer.disconnect(); // Cleanup
+
+        const scrollContainer = document.querySelector('.snap-y');
+        const handleScroll = () => {
+            if (scrollContainer) {
+                setScrolled(scrollContainer.scrollTop > 50);
+            }
+        };
+        scrollContainer?.addEventListener('scroll', handleScroll);
+
+        return () => {
+            observer.disconnect();
+            scrollContainer?.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
-    useEffect(() => {
-        switch (currentSection) {
-            case 'headerRef':
-                setBgLogo('bg-kopcarqrosroj');
-                setBgNavbar('bg-black bg-opacity-70');
-                break; //'kopcarqrosroj.png';
-            case 'trabajosRef':
-                setBgLogo('bg-kopcarqrosroj');
-                setBgNavbar('bg-white');
-                break; //'kopcarqnegro.png';
-            case 'nosotrosRef':
-                setBgLogo('bg-kopcarqrosroj');
-                setBgNavbar('bg-black bg-opacity-70');
-                break; //'kopcarqblanco.png';
-            case 'contactoRef':
-                setBgLogo('bg-kopcarqrosroj');
-                setBgNavbar('bg-white')
-                break; //'kopcarqblanco.png';
-            // default:
-            //     setBgLogo('bg-kopcarqrosroj')
-            //     console.log(currentSection)
-        }
-    }, [currentSection]);
-
-
-
+    const isLight = currentSection === 'trabajosRef' || currentSection === 'contactoRef';
 
     return (
-        // <div className="z-50 grid grid-cols-4 h-20 w-full bg-gradient-to-b border-b-2 outline-black outline-1.5 outline border-b-amber-500 from-red-950 bg-red-600 text-white sticky overflow-hidden">
-        <div className={`z-50 visible flex justify-between items-center w-full absolute overflow-hidden text-white md:h-16  md:bg-black md:bg-opacity-80
-        ${isOpen ? "absolute top-0 h-screen bg-black transition-all ease-in duration-700" : `${bgnavbar} transition-all ease-out duration-500 w-0 h-16`}  `}>
+        <nav className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 transition-all duration-500 ease-in-out
+            ${isOpen ? 'h-screen bg-white flex-col' : 'h-16'}
+            ${!isOpen && scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : !isOpen ? 'bg-transparent' : ''}
+        `}>
+            {/* Top bar */}
+            <div className={`flex items-center justify-between w-full ${isOpen ? 'h-16 flex-shrink-0' : 'h-full'}`}>
+                {/* Logo */}
+                <a href='#headerRef' onClick={toggleNav} className="relative h-10 w-40 flex items-center">
+                    <div className={`h-full w-full bg-contain bg-no-repeat bg-left transition-all duration-300
+                        ${isLight || scrolled || isOpen ? 'bg-kopcarqnegro' : 'bg-kopcarqrosroj'}
+                    `} />
+                </a>
 
-            <a href='#headerRef' onClick={toggleNav}
-                className={`h-full w-1/2 items-center relative flex justify-center md:p-0 md:flex-1 md:w-10/12 text-center
-            ${isOpen ? "absolute top-0 p-0" : ""} `}>
-                <div className={`h-3/4 w-[92%] top-0 left-0 relative rounded-br-md transition-all ease-in-out duration-600
-                bg-left bg-contain bg-no-repeat ${bglogo} md:bg-kopcarqrosroj ${isOpen ? "ml-3 bg-kopcarqrosroj" : ""}`} />
-            </a>
+                {/* Desktop nav links */}
+                <div className="hidden md:flex items-center gap-8">
+                    <a href='#trabajosRef'
+                        className={`text-sm font-semibold tracking-wide transition-colors duration-300 hover:text-red-500
+                        ${isLight || scrolled ? 'text-zinc-800' : 'text-white'}
+                        ${currentSection === 'trabajosRef' ? 'text-red-500' : ''}
+                    `}>
+                        TRABAJOS
+                    </a>
+                    <a href='#nosotrosRef'
+                        className={`text-sm font-semibold tracking-wide transition-colors duration-300 hover:text-red-500
+                        ${isLight || scrolled ? 'text-zinc-800' : 'text-white'}
+                        ${currentSection === 'nosotrosRef' ? 'text-red-500' : ''}
+                    `}>
+                        NOSOTROS
+                    </a>
+                    <a href='#contactoRef'
+                        className="text-sm font-semibold tracking-wide bg-red-500 text-white px-5 py-2 rounded-full transition-all duration-300 hover:bg-red-600 hover:shadow-lg">
+                        CONTACTO
+                    </a>
+                </div>
 
-            <div className={`bg-red-500  flex m-0 top-0 right-0 absolute w-16 justify-center items-center rounded-bl-md md:hidden 
-            ${isOpen ? "absolute h-16 top-0 right-0" : "h-16"} `}>
-                <Hamburger toggled={isOpen} toggle={setOpen} direction="left" />
+                {/* Mobile hamburger */}
+                <div className="md:hidden z-50">
+                    <Hamburger
+                        toggled={isOpen}
+                        toggle={setOpen}
+                        direction="left"
+                        size={24}
+                        color={isOpen ? '#ef4444' : (isLight || scrolled ? '#18181b' : '#ffffff')}
+                    />
+                </div>
             </div>
 
-            <div className={`-z-10  flex flex-col h-0 w-0 overflow-hidden relative text-center justify-center items-center rounded-bl-[50px]
-            md:w-screen md:h-16 md:top-0 md:right-0 md:rounded-none md:flex-row md:flex-[5-0-0] 
-            ${isOpen ? "transition-none ease-in duration-300 top-0 right-0 h-screen w-screen rounded-bl-none" :
-                    "transition-none ease-out duration-700 -top-5"}`} >
-
-                <a href='#trabajosRef' onClick={toggleNav}
-                    className="flex-1 max-h-14 md:h-auto font-bold hover:text-red-500 hover:ease-in-out hover:rounded-b-2xl hover:border-solid hover:border-collapse transition-all duration-400 hover:scale-150">
-                    TRABAJOS
-                </a>
-
-                <a href='#nosotrosRef' onClick={toggleNav}
-                    className="flex-1 max-h-14 md:h-auto font-bold hover:text-red-500 hover:ease-in-out hover:rounded-b-2xl hover:border-solid hover:border-collapse transition-all duration-400 hover:scale-150">
-                    NOSOTROS
-                </a>
-
-                <a href='#contactoRef' onClick={toggleNav} className="flex-1 max-h-14 h-auto font-bold transition-all duration-400 hover:scale-150">
-                    <span className="md:py-1 py-3 px-6 md:px-3 bg-red-500 hover:ease-in-out hover:border-solid hover:border-collapse ">
+            {/* Mobile menu overlay */}
+            {isOpen && (
+                <div className="flex flex-col items-center justify-center flex-1 gap-10 w-full md:hidden">
+                    <a href='#headerRef' onClick={toggleNav}
+                        className="text-3xl font-light text-zinc-800 tracking-widest transition-colors duration-300 hover:text-red-500">
+                        INICIO
+                    </a>
+                    <a href='#trabajosRef' onClick={toggleNav}
+                        className="text-3xl font-light text-zinc-800 tracking-widest transition-colors duration-300 hover:text-red-500">
+                        TRABAJOS
+                    </a>
+                    <a href='#nosotrosRef' onClick={toggleNav}
+                        className="text-3xl font-light text-zinc-800 tracking-widest transition-colors duration-300 hover:text-red-500">
+                        NOSOTROS
+                    </a>
+                    <a href='#contactoRef' onClick={toggleNav}
+                        className="text-xl font-semibold tracking-widest bg-red-500 text-white px-8 py-3 rounded-full transition-all duration-300 hover:bg-red-600">
                         CONTACTO
-                    </span>
-                </a>
+                    </a>
 
-            </div >
-        </div >
+                    <div className="absolute bottom-10 flex flex-col items-center gap-2 text-zinc-400 text-sm">
+                        <span>kopcarq.com</span>
+                        <div className="w-8 h-0.5 bg-red-500 rounded-full" />
+                    </div>
+                </div>
+            )}
+        </nav>
     )
 }

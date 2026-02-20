@@ -79,7 +79,7 @@ export default function Coverflow() {
                         style={{ backgroundImage: `url(${it})` }}
                         // className='coverflow-item max-w-full h-48 md:h-[350px] md:max-h-[0.5] md:w-[550px] md:top-0 md:absolute'
                         className="coverflow-item absolute origin-center h-[100px] w-[175px] max-w-full lg:h-[350px] lg:w-[550px] 
-                        border-2 border-red-600 rounded-lg bg-no-repeat bg-cover bg-center 
+                        border border-zinc-200 rounded-lg bg-no-repeat bg-cover bg-center shadow-lg 
                         transition-all duration-500 ease-out">
                     </div>)
                 }
