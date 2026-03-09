@@ -7,7 +7,6 @@ export default function Navbar() {
     const toggleNav = () => { setOpen(false) }
 
     const [currentSection, setCurrentSection] = useState('');
-    const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -23,27 +22,12 @@ export default function Navbar() {
         document.querySelectorAll('section').forEach((section) => {
             observer.observe(section);
         });
-
-        const scrollContainer = document.querySelector('.snap-y');
-        const handleScroll = () => {
-            if (scrollContainer) {
-                setScrolled(scrollContainer.scrollTop > 50);
-            }
-        };
-        scrollContainer?.addEventListener('scroll', handleScroll);
-
-        return () => {
-            observer.disconnect();
-            scrollContainer?.removeEventListener('scroll', handleScroll);
-        };
+        return () => observer.disconnect();
     }, []);
 
-    const isLight = currentSection === 'trabajosRef' || currentSection === 'contactoRef';
-
     return (
-        <nav className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 transition-all duration-500 ease-in-out
-            ${isOpen ? 'h-screen bg-white flex-col' : 'h-16'}
-            ${!isOpen && scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : !isOpen ? 'bg-transparent' : ''}
+        <nav className={`z-50 fixed top-0 left-0 right-0 flex items-center justify-between px-4 md:px-8 transition-all duration-500 ease-in-out bg-white
+            ${isOpen ? 'h-screen flex-col' : 'h-16 shadow-sm'}
         `}>
             {/* Top bar */}
             <div className={`flex items-center justify-between w-full ${isOpen ? 'h-16 flex-shrink-0' : 'h-full'}`}>
@@ -56,15 +40,13 @@ export default function Navbar() {
                 <div className="hidden md:flex items-center gap-8">
                     <a href='#trabajosRef'
                         className={`text-sm font-semibold tracking-wide transition-colors duration-300 hover:text-red-500
-                        ${isLight || scrolled ? 'text-zinc-800' : 'text-white'}
-                        ${currentSection === 'trabajosRef' ? 'text-red-500' : ''}
+                        ${currentSection === 'trabajosRef' ? 'text-red-500' : 'text-zinc-800'}
                     `}>
                         TRABAJOS
                     </a>
                     <a href='#nosotrosRef'
                         className={`text-sm font-semibold tracking-wide transition-colors duration-300 hover:text-red-500
-                        ${isLight || scrolled ? 'text-zinc-800' : 'text-white'}
-                        ${currentSection === 'nosotrosRef' ? 'text-red-500' : ''}
+                        ${currentSection === 'nosotrosRef' ? 'text-red-500' : 'text-zinc-800'}
                     `}>
                         NOSOTROS
                     </a>
@@ -81,7 +63,7 @@ export default function Navbar() {
                         toggle={setOpen}
                         direction="left"
                         size={24}
-                        color={isOpen ? '#ef4444' : (isLight || scrolled ? '#18181b' : '#ffffff')}
+                        color={isOpen ? '#ef4444' : '#18181b'}
                     />
                 </div>
             </div>

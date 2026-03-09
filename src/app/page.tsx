@@ -10,8 +10,16 @@ export default function Home() {
 
     const [selection, setSelection] = useState('');
     const [showSecondSelect, setShowSecondSelect] = useState(false);
-    const TRABAJOS_KEYS = ['diseno', 'visualizacion', 'soluciones', 'remodelaciones'] as const;
+    const TRABAJOS_KEYS = ['ejecucion', 'diseno', 'visualizacion', 'soluciones', 'remodelaciones'] as const;
+    const TRABAJOS_FORM_OPTIONS: Record<string, { title: string; items: string[] }> = {
+        ejecucion: { title: 'Ejecución y dirección de obra', items: ['Construcción de viviendas, edificios, bares, locales comerciales y bailables', 'Dirección de obras', 'Amojonamiento de terreno y replanteo de construcción', 'Asesoramiento en todas las etapas de la obra'] },
+        diseno: { title: 'Diseño y documentación', items: ['Anteproyecto y proyecto ejecutivo', 'Cómputo y presupuesto', 'Planos para viviendas en barrios privados', 'Planos municipales y gestión de permisos', 'Regularización de planos (incluye relevamiento de preexistencias)'] },
+        visualizacion: { title: 'Visualización', items: ['Renders hiperrealistas (imágenes de como quedaría tu proyecto)', 'Recorridos virtuales', 'Animaciones 3D'] },
+        soluciones: { title: 'Soluciones técnicas', items: ['Diagnóstico estructural', 'Patologías edilicias (grietas, humedad, filtraciones)', 'Informes técnicos para reclamos', 'Asesoramiento pre-compra de propiedades'] },
+        remodelaciones: { title: 'Remodelaciones y mejoras', items: ['Reformas integrales', 'Ampliaciones', 'Diseño de interiores', 'Diseño de iluminación', 'Diseño de cocinas y baños', 'Paisajismo y diseño de exteriores', 'Quinchos y piletas'] },
+    };
     const [expandedTrabajos, setExpandedTrabajos] = useState<Record<string, boolean>>({
+        ejecucion: false,
         diseno: false,
         visualizacion: false,
         soluciones: false,
@@ -22,21 +30,16 @@ export default function Home() {
     const handleTrabajosExpand = (key: string) => {
         const index = TRABAJOS_KEYS.indexOf(key as typeof TRABAJOS_KEYS[number]);
         const isCurrentlyExpanded = expandedTrabajos[key];
-        setExpandedTrabajos({ diseno: false, visualizacion: false, soluciones: false, remodelaciones: false, [key]: !isCurrentlyExpanded });
+        setExpandedTrabajos({ ejecucion: false, diseno: false, visualizacion: false, soluciones: false, remodelaciones: false, [key]: !isCurrentlyExpanded });
         if (!isCurrentlyExpanded) setActiveCarouselIndex(index);
     };
 
     const handleCarouselIndexChange = (index: number) => {
         setActiveCarouselIndex(index);
         const key = TRABAJOS_KEYS[index];
-        setExpandedTrabajos({ diseno: false, visualizacion: false, soluciones: false, remodelaciones: false, [key]: true });
+        setExpandedTrabajos({ ejecucion: false, diseno: false, visualizacion: false, soluciones: false, remodelaciones: false, [key]: true });
     };
 
-    const handleFirstSelectChange = (event: { target: { value: any; }; }) => {
-        const value = event.target.value;
-        setSelection(value);
-        setShowSecondSelect(value === 'Obra');
-    };
 
     const [formData, setFormData] = useState({
         nombre: '',
@@ -47,22 +50,14 @@ export default function Home() {
         message: '',
     });
 
-    useEffect(() => {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            message: `${prevFormData.necesito ? `Hola Kopcarq! Necesito informacion sobre su servicio de` : ""} ${prevFormData.necesito} ${prevFormData.necesito === 'Obra' ? `para una ${prevFormData.necesito2}.` : ''} 
-Mas datos: 
-${prevFormData.descripcion}
-
-Muchas gracias,
-${prevFormData.nombre}
-${prevFormData.email}`,
-        }));
-    }, [formData.necesito, formData.necesito2, formData.descripcion]);
 
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+        setFormData((prev) => {
+            const next = { ...prev, [name]: value };
+            if (name === 'necesito') next.necesito2 = '';
+            return next;
+        });
     };
 
     const handleEnviarClick = () => {
@@ -85,8 +80,9 @@ ${prevFormData.email}`,
             alert('Por favor, indique que tipo de servicio necesita.');
             return
         }
-        if (formData.necesito === "Obra" && !formData.necesito2) {
-            alert('Por favor, especifique el tipo de obra.');
+        const needsSubSelect = TRABAJOS_KEYS.includes(formData.necesito as typeof TRABAJOS_KEYS[number]);
+        if (needsSubSelect && !formData.necesito2) {
+            alert('Por favor, seleccione el tema específico.');
             return
         }
         if (!formData.descripcion) {
@@ -94,19 +90,29 @@ ${prevFormData.email}`,
             return
         }
 
-        const message = `Hola, mi nombre es ${formData.nombre}. Necesito ${formData.necesito}.`;
+        const necesitoLabel = formData.necesito === 'otro' ? 'Otro' : (TRABAJOS_FORM_OPTIONS[formData.necesito]?.title || formData.necesito);
+        const temaLabel = formData.necesito === 'otro' ? '' : (formData.necesito2 || '');
+        const temaLine = temaLabel ? `\nTEMA ESPECIFICO: ${temaLabel}` : '';
+        const message = `Hola KOPCArq.! Necesito informacion sobre:
+
+${necesitoLabel}${temaLine}
+
+Descripcion del trabajo: ${formData.descripcion}
+
+${formData.nombre}
+${formData.email}`;
         const whatsappLink = `https://wa.me/+5493416289174/?text=${encodeURIComponent(message)}`;
         window.open(whatsappLink, '_blank');
     };
 
     return (
-        <div className='block h-screen max-h-screen relative overflow-y-scroll snap-y snap-mandatory'>
+        <div className='block h-screen max-h-screen relative overflow-y-scroll'>
 
             {/* HERO */}
             <InView>
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
-                        <section id="headerRef" className="h-full relative overflow-hidden snap-start">
+                        <section id="headerRef" className="h-full relative overflow-hidden">
                             <div className="h-full relative top-0 z-0">
                                 <Carousel />
                             </div>
@@ -137,7 +143,7 @@ ${prevFormData.email}`,
             <InView>
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
-                        <section id="trabajosRef" className='h-full relative overflow-hidden snap-start'>
+                        <section id="trabajosRef" className='h-full relative overflow-hidden'>
                             <div className="z-10 bg-white absolute top-0 left-0 w-full h-full flex flex-col overflow-hidden">
                                 <div className="flex-shrink-0 pt-20 md:pt-24 pb-2 px-6 md:px-16 text-zinc-900">
                                     <h2 className="font-bold text-3xl md:text-5xl text-balance">
@@ -155,8 +161,9 @@ ${prevFormData.email}`,
                                     <div className="flex-1 overflow-y-auto py-2 w-full md:w-2/4 lg:w-2/3 min-h-0">
                                         <div className="flex flex-col gap-2 text-zinc-700">
                                             {[
-                                                { key: 'diseno', title: 'Diseño y documentación', items: ['Anteproyecto y proyecto ejecutivo', 'Dirección de obra', 'Cómputo y presupuesto', 'Planos municipales y gestión de permisos', 'Regularización de planos', 'Modelado BIM', 'Planos para PH / subdivisiones'] },
-                                                { key: 'visualizacion', title: 'Visualización y marketing inmobiliario', items: ['Renders hiperrealistas', 'Recorridos virtuales 360°', 'Animaciones 3D', 'Home staging virtual', 'Diseño para inmobiliarias / desarrolladores'] },
+                                                { key: 'ejecucion', title: 'Ejecución y dirección de obra', items: ['Construcción de viviendas, edificios, bares, locales comerciales y bailables', 'Dirección de obras', 'Amojonamiento de terreno y replanteo de construcción', 'Asesoramiento en todas las etapas de la obra'] },
+                                                { key: 'diseno', title: 'Diseño y documentación', items: ['Anteproyecto y proyecto ejecutivo', 'Cómputo y presupuesto', 'Planos para viviendas en barrios privados', 'Planos municipales y gestión de permisos', 'Regularización de planos (incluye relevamiento de preexistencias)'] },
+                                                { key: 'visualizacion', title: 'Visualización', items: ['Renders hiperrealistas (imágenes de como quedaría tu proyecto)', 'Recorridos virtuales', 'Animaciones 3D'] },
                                                 { key: 'soluciones', title: 'Soluciones técnicas', items: ['Diagnóstico estructural', 'Patologías edilicias (grietas, humedad, filtraciones)', 'Informes técnicos para reclamos', 'Asesoramiento pre-compra de propiedades'] },
                                                 { key: 'remodelaciones', title: 'Remodelaciones y mejoras', items: ['Reformas integrales', 'Ampliaciones', 'Diseño de interiores', 'Diseño de iluminación', 'Diseño de cocinas y baños', 'Paisajismo y diseño de exteriores', 'Quinchos y piletas'] },
                                             ].map(({ key, title, items }) => (
@@ -193,7 +200,7 @@ ${prevFormData.email}`,
             <InView>
                 {({ inView, ref }) => (
                     <div ref={ref} className='h-full'>
-                        <section id="nosotrosRef" className='flex h-full relative bg-nosotrosimg bg-cover overflow-hidden snap-end'>
+                        <section id="nosotrosRef" className='flex h-full relative bg-nosotrosimg bg-cover overflow-hidden'>
                             <div className={`bg-white/95 backdrop-blur-sm p-10 md:p-16 absolute md:relative top-0 right-0 w-full h-full flex items-center justify-center md:w-2/5
                                 ${inView ? 'animate-fadeRightAnimation 4s ease-in-out visible' : 'hidden'}`}>
                                 <div className="max-w-md">
@@ -217,10 +224,9 @@ ${prevFormData.email}`,
             {/* CONTACTO + FOOTER */}
             <InView>
                 {({ inView, ref }) => (
-                    <div ref={ref} className='h-full'>
-                        <section id="contactoRef" className='flex flex-col relative h-full bg-white overflow-hidden overflow-y-scroll snap-end'>
-                            <div className={`flex flex-col flex-1 w-full max-w-4xl mx-auto px-6 md:px-12 pt-20 pb-32
-                                ${inView ? 'animate-fadeBottomAnimation 4s ease-in-out visible' : 'hidden'}`}>
+                    <div ref={ref} className='min-h-screen'>
+                        <section id="contactoRef" className='flex flex-col relative min-h-screen bg-white'>
+                            <div className="flex flex-col flex-1 w-full max-w-4xl mx-auto px-6 md:px-12 pt-20 pb-32">
                                 
                                 <div className="mb-6">
                                     <div className="w-12 h-1 bg-red-500 rounded-full mb-4" />
@@ -258,22 +264,27 @@ ${prevFormData.email}`,
                                             className={`border border-zinc-200 focus:border-red-500 text-base rounded-lg h-12 px-4 outline-none transition-colors duration-200 bg-zinc-50 focus:bg-white appearance-none
                                             ${formData.necesito === "" ? 'text-zinc-400' : 'text-zinc-900'}`}>
                                             <option value="" disabled selected hidden>Seleccione un servicio</option>
-                                            <option value="Planos" className='text-zinc-900'>Planos</option>
-                                            <option value="Obra" className='text-zinc-900'>Obra</option>
+                                            <option value="ejecucion" className='text-zinc-900'>Ejecución y dirección de obra</option>
+                                            <option value="diseno" className='text-zinc-900'>Diseño y documentación</option>
+                                            <option value="visualizacion" className='text-zinc-900'>Visualización</option>
+                                            <option value="soluciones" className='text-zinc-900'>Soluciones técnicas</option>
+                                            <option value="remodelaciones" className='text-zinc-900'>Remodelaciones y mejoras</option>
+                                            <option value="otro" className='text-zinc-900'>Otro</option>
                                         </select>
                                     </div>
 
-                                    {/* Tipo (conditional) */}
-                                    {formData.necesito === "Obra" && (
+                                    {/* Tema específico (cuando hay categoría seleccionada) */}
+                                    {formData.necesito && formData.necesito !== 'otro' && TRABAJOS_FORM_OPTIONS[formData.necesito] && (
                                         <div className='flex flex-col gap-1.5'>
-                                            <label className='text-xs font-semibold tracking-wider text-zinc-400 uppercase' htmlFor="necesito2">Tipo de obra</label>
+                                            <label className='text-xs font-semibold tracking-wider text-zinc-400 uppercase' htmlFor="necesito2">Tema específico</label>
                                             <select id="necesito2" name="necesito2" onChange={handleChange}
                                                 className={`border border-zinc-200 focus:border-red-500 text-base rounded-lg h-12 px-4 outline-none transition-colors duration-200 bg-zinc-50 focus:bg-white appearance-none
                                                 ${formData.necesito2 === "" ? 'text-zinc-400' : 'text-zinc-900'}`}>
-                                                <option value="" disabled selected hidden>Seleccione tipo</option>
-                                                <option value="Construccion" className='text-zinc-900'>Construccion</option>
-                                                <option value="Remodelacion" className='text-zinc-900'>Remodelacion</option>
-                                                <option value="Reparacion" className='text-zinc-900'>Reparacion</option>
+                                                <option value="" disabled selected hidden>Seleccione tema específico</option>
+                                                {TRABAJOS_FORM_OPTIONS[formData.necesito].items.map((item) => (
+                                                    <option key={item} value={item} className='text-zinc-900'>{item}</option>
+                                                ))}
+                                                <option value="Otro" className='text-zinc-900'>Otro</option>
                                             </select>
                                         </div>
                                     )}
