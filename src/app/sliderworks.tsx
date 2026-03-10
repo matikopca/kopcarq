@@ -17,10 +17,11 @@ export default function Coverflow({ activeIndex = 0, onIndexChange }: CoverflowP
     ;
     // const Coverflow = (props: { imagestst: string[] }) => {
     const imagestst = [
-        '/edif1.jpg',
-        '/edif2.jpg',
-        '/edif3.jpg',
-        '/int2.png',
+        '/direcciondeobra.png',   // ejecucion (0) - Ejecución y dirección de obra
+        '/disenoydoc.png',        // diseno (1) - Diseño y documentación
+        '/visualizacion.png',     // visualizacion (2) - Visualización
+        '/solucionestecnicas.png', // soluciones (3) - Soluciones técnicas
+        '/remodelacionesmejoras.png', // remodelaciones (4) - Remodelaciones y mejoras
     ];
 
     const el = useRef<HTMLDivElement>(null);
