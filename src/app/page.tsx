@@ -22,26 +22,11 @@ export default function Home() {
 
     const [formData, setFormData] = useState({
         nombre: '',
-        email: '',
         necesito: '',
-        necesito2: '', // Puedes establecer valores predeterminados según sea necesario
+        necesito2: '',
         descripcion: '',
         message: '',
     });
-
-    useEffect(() => {
-        // Cuando formData.nombre cambie, actualiza la descripción
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            message: `${prevFormData.necesito ? `Hola Kopcarq! Necesito informacion sobre su servicio de` : ""} ${prevFormData.necesito} ${prevFormData.necesito === 'Obra' ? `para una ${prevFormData.necesito2}.` : ''} 
-Mas datos: 
-${prevFormData.descripcion}
-
-Muchas gracias,
-${prevFormData.nombre}
-${prevFormData.email}`,
-        }));
-    }, [formData.necesito, formData.necesito2, formData.descripcion]);
 
     // Función para manejar cambios en el formulario
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -55,19 +40,6 @@ ${prevFormData.email}`,
             alert('Por favor, complete su nombre.');
             return
         }
-        if (!formData.email) {
-            alert('Por favor, complete su email.');
-            return
-        }
-        else {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(formData.email)) {
-                alert('Por favor, ingrese un correo electrónico válido.')
-                return;
-            }
-
-        }
-
         if (!formData.necesito) {
             alert('Por favor, indique que tipo de servicio necesita.');
             return
@@ -202,11 +174,6 @@ ${prevFormData.email}`,
                                             <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="nombre">NOMBRE:</label>
                                             <input className='flex-[4-0-0] border-red-500 border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2'
                                                 type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} placeholder='Ingresa tu nombre' required />
-                                        </div>
-                                        <div className='flex flex-col py-2 md:flex-row'>
-                                            <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="email">EMAIL:</label>
-                                            <input className='flex-[4-0-0] border-red-500  border-b-4 text-xl text-black rounded-md h-10 outline-none md:max-w-[600px] md:ml-2 '
-                                                type="email" id="email" name="email" value={formData.email} onChange={handleChange} placeholder='Ingresa tu correo' required />
                                         </div>
                                         <div className='flex flex-col py-2 md:flex-row'>
                                             <label className='flex-1 max-w-[120px] h-10 text-xl font-medium content-center' htmlFor="necesito">NECESITO:</label>
