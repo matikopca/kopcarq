@@ -213,7 +213,7 @@ ${formData.nombre}`;
                 {({ inView, ref }) => (
                     <div ref={ref} className='min-h-screen'>
                         <section id="contactoRef" className='flex flex-col relative min-h-screen bg-white'>
-                            <div className="flex flex-col flex-1 w-full max-w-4xl mx-auto px-6 md:px-12 pt-20 pb-32">
+                            <div className="flex flex-col flex-1 w-full max-w-4xl mx-auto px-6 md:px-12 pt-20 pb-16">
                                 
                                 <div className="mb-6">
                                     <div className="w-12 h-1 bg-red-500 rounded-full mb-4" />
@@ -224,15 +224,6 @@ ${formData.nombre}`;
                                         Dejanos tu mensaje, te respondemos a la brevedad.
                                     </p>
                                 </div>
-                            </div>
-                            {/* <div className='z-20 md:z-0 flex flex-col md:mt-0 relative box-border px-4 md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'> */}
-                            <div className='z-20 md:z-0 flex flex-col justify-start md:mt-0 relative box-border md:content-around h-screen w-screen md:items-center md:w-[85%] bg-white'>
-                                <h1 className="self-start px-6 pt-16 md:pt-20 letter-spacing-xs box-border font-extrabold text-4xl lg:text-6xl text-zinc-900">
-                                    Contacto
-                                </h1>
-                                <h3 className='self-start px-6 text-2xl md:text-3xl text-zinc-800 font-medium flex'>
-                                    Dejanos tu mensaje, te respondemos a la brevedad.
-                                </h3>
                                 <form className='flex flex-col gap-5 w-full'>
                                     {/* Nombre */}
                                     <div className='flex flex-col gap-1.5'>
@@ -286,16 +277,16 @@ ${formData.nombre}`;
                                     </div>
 
                                     {/* Submit */}
-                                    <div className='pt-2 flex justify-center'>
+                                    {/* <div className='pt-2 flex justify-center'> */}
                                         <button type="button"
                                             className='bg-red-500 text-white font-semibold px-8 py-3 rounded-full transition-all duration-300 hover:bg-red-600 hover:shadow-lg hover:shadow-red-500/25 active:scale-95'
                                             onClick={handleEnviarClick}
                                         >
                                             Enviar mensaje
                                         </button>
-                                    </div>
+
                                 </form>
-                            </div>
+                                </div>
 
                             {/* Footer */}
                             <footer className='flex flex-col md:flex-row items-center justify-between w-full px-6 md:px-12 py-6 bg-zinc-50 border-t border-zinc-100 gap-4'>
